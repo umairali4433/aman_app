@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:aman_app/model/getlink.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +82,27 @@ class forbody extends StatefulWidget{
     AnimationController animationController;
     Animation<double> animation;
     TabController _tabController;
+    List<String> getgalerrieslist = ['https://aman.paknavy.gov.pk/images/AmanPicsHome/1.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/2.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/3.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/3.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+
+    ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/5.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/6.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/6.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+    ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/8.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+
+    ];
+    List<getlink> getlinklist = [];
+
+    getlink get =getlink('Umair','sfsdfd');
+   // getlinklist.add(get);
+
+    List<Icon> iconslist = [Icon(Icons.cloud ,size: 60,color: Colors.grey),
+      Icon(Icons.local_hospital, size: 50,color: Colors.grey),
+      Icon(Icons.home, size: 50,color: Colors.grey),Icon(Icons.domain, size: 50,color: Colors.grey),
+      Icon(Icons.compare_arrows, size: 50,color: Colors.grey),Icon(Icons.vignette, size: 50,color: Colors.grey),
+      Icon(Icons.filter_b_and_w, size: 50,color: Colors.grey),Icon(Icons.switch_camera, size: 50,color: Colors.grey),];
 
   List<String> list = ['https://aman.paknavy.gov.pk/images/Slider/3.jpg','https://aman.paknavy.gov.pk/images/Slider/4.jpg','https://aman.paknavy.gov.pk/images/Slider/5.jpg','https://aman.paknavy.gov.pk/images/Slider/6.jpg','https://aman.paknavy.gov.pk/images/Slider/7.jpg',
   'https://aman.paknavy.gov.pk/images/Slider/8.jpg',
@@ -415,40 +437,95 @@ class forbody extends StatefulWidget{
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                'Headline',
+                'Gallery',
                 style: TextStyle(fontSize: 18),
               ),
               SizedBox(
-                height: 200.0,
+                height: 150.0,
                 child: ListView.builder(
                   physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 15,
-                  itemBuilder: (BuildContext context, int index) => Card(
-                    child: Center(child: Text('Dummy Card Text')),
+                  itemCount: getgalerrieslist.length,
+                  itemBuilder: (BuildContext context, int index) => Padding(
+                    padding: EdgeInsets.only(left:15,top: 15 ),
+                    child: Container(
+                      width: 200,
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          side: new BorderSide(color: Colors.blue, width: .5),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Image.network(getgalerrieslist[index]),
+                      ),
+
+                    ),
                   ),
                 ),
               ),
+
+            ],
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
               Text(
-                'Demo Headline 2',
+                'Important Links',
                 style: TextStyle(fontSize: 18),
               ),
-              Card(
-                child: ListTile(title: Text('Motivation $int'), subtitle: Text('this is a description of the motivation')),
+              SizedBox(
+                height: 150.0,
+                child: ListView.builder(
+                  physics: ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: iconslist.length,
+                  itemBuilder: (BuildContext context, int index) => Padding(
+                    padding: EdgeInsets.only(left:15,top: 15 ),
+                    child: Container(
+                      color: Colors.grey,
+                      width: 200,
+                      child: Card(
+                          elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          side: new BorderSide(color: Colors.blue, width: .5),
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+
+
+                         Container(
+                           width: 50,
+                           child: iconslist[index],
+
+                         ),
+
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Container(
+                              height: 100,
+                              width: 1,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Center(
+                              child: Text('sadsad'),
+                            )
+                          ],
+                        )
+                      ),
+
+                    ),
+                  ),
+                ),
               ),
-              Card(
-                child: ListTile(title: Text('Motivation $int'), subtitle: Text('this is a description of the motivation')),
-              ),
-              Card(
-                child: ListTile(title: Text('Motivation $int'), subtitle: Text('this is a description of the motivation')),
-              ),
-              Card(
-                child: ListTile(title: Text('Motivation $int'), subtitle: Text('this is a description of the motivation')),
-              ),
-              Card(
-                child: ListTile(title: Text('Motivation $int'), subtitle: Text('this is a description of the motivation')),
-              ),
+
             ],
           ),
 
