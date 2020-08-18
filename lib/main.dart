@@ -7,7 +7,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:maps/maps.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ExpansionTileSample extends StatelessWidget {
   @override
@@ -86,24 +88,21 @@ class forbody extends StatefulWidget{
     ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/2.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
     ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/3.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
     ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/3.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-
     ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/5.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
     ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/6.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
     ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/6.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
     ,'https://aman.paknavy.gov.pk/images/AmanPicsHome/8.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
 
     ];
-    List<getlink> getlinklist = [];
 
-    getlink get =getlink('Umair','sfsdfd');
-   // getlinklist.add(get);
+    List<getlink> getlinklist = [];
 
     List<Icon> iconslist = [Icon(Icons.cloud ,size: 60,color: Colors.grey),
       Icon(Icons.local_hospital, size: 50,color: Colors.grey),
       Icon(Icons.home, size: 50,color: Colors.grey),Icon(Icons.domain, size: 50,color: Colors.grey),
       Icon(Icons.compare_arrows, size: 50,color: Colors.grey),Icon(Icons.vignette, size: 50,color: Colors.grey),
       Icon(Icons.filter_b_and_w, size: 50,color: Colors.grey),Icon(Icons.switch_camera, size: 50,color: Colors.grey),];
-
+    Future<void> _launched;
   List<String> list = ['https://aman.paknavy.gov.pk/images/Slider/3.jpg','https://aman.paknavy.gov.pk/images/Slider/4.jpg','https://aman.paknavy.gov.pk/images/Slider/5.jpg','https://aman.paknavy.gov.pk/images/Slider/6.jpg','https://aman.paknavy.gov.pk/images/Slider/7.jpg',
   'https://aman.paknavy.gov.pk/images/Slider/8.jpg',
   'https://aman.paknavy.gov.pk/images/Slider/9.jpg',
@@ -116,6 +115,19 @@ class forbody extends StatefulWidget{
     @override
     void initState() {
       super.initState();
+
+      getlinklist.add(getlink('Weather Forecast \n(February, 2019)','https://www.accuweather.com/en/pk/karachi/261158/month/261158?monyr=2/01/2019'));
+      getlinklist.add(getlink('Medical\nFacilities\nKarachi\n  ','http://www.karachisnob.com/hospitals-clinics-karachi.htm'));
+      getlinklist.add(getlink('Hospitality Centre\nKarachi','https://www.travel-culture.com/karachi-hotels'));
+      getlinklist.add(getlink('Medical\nFacilities\nKarachi\n  ','http://www.karachisnob.com/hospitals-clinics-karachi.htm'));
+
+      getlinklist.add(getlink('Emergency\nNumbers\nKarachi\n  ','https://www.brandsynario.com/karachi-emergency-numbers-you-must-have-on-your-phone'));
+
+      getlinklist.add(getlink('Exchange\nRate\nPKR\n  ','https://www.xe.com/currency/pkr-pakistani-rupee'));
+      getlinklist.add(getlink('Sports\nCenter\nKarachi\n  ','https://en.wikipedia.org/wiki/List_of_sports_venues_in_Karachi'));
+
+      getlinklist.add(getlink('Karachi\nPort\nImportant features\n  ','https://en.wikipedia.org/wiki/Port_of_Karachi'));
+      getlinklist.add(getlink('More\nAbout\nKarachi\n  ','https://en.wikipedia.org/wiki/Port_of_Karachi'));
       _tabController = new TabController(length: 4, vsync: this);
       animationController = AnimationController(
         vsync: this,
@@ -126,6 +138,7 @@ class forbody extends StatefulWidget{
         curve: Curves.easeIn,
       );
     }
+
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +155,20 @@ class forbody extends StatefulWidget{
                itemBuilder: (BuildContext context,int index){
                  return new ClipRRect(
                    borderRadius: BorderRadius.circular(9.0),
-                   child: Image.network(list[index],fit: BoxFit.fill,),
+                   child: Image.network(list[index],fit: BoxFit.fill,
+                     loadingBuilder: (BuildContext context, Widget child,
+                         ImageChunkEvent loadingProgress) {
+                       if (loadingProgress == null) return child;
+                       return Center(
+                         child: CircularProgressIndicator(
+                           value: loadingProgress.expectedTotalBytes != null
+                               ? loadingProgress.cumulativeBytesLoaded /
+                               loadingProgress.expectedTotalBytes
+                               : null,
+                         ),
+                       );
+                     },
+                   ),
                  );
                },
                itemCount: list.length,
@@ -456,7 +482,11 @@ class forbody extends StatefulWidget{
                           side: new BorderSide(color: Colors.blue, width: .5),
                           borderRadius: BorderRadius.circular(5.0),
                         ),
-                        child: Image.network(getgalerrieslist[index]),
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                          imageUrl: getgalerrieslist[index],
+                        ),
                       ),
 
                     ),
@@ -482,45 +512,42 @@ class forbody extends StatefulWidget{
                   itemCount: iconslist.length,
                   itemBuilder: (BuildContext context, int index) => Padding(
                     padding: EdgeInsets.only(left:15,top: 15 ),
-                    child: Container(
-                      color: Colors.grey,
-                      width: 200,
-                      child: Card(
-                          elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          side: new BorderSide(color: Colors.blue, width: .5),
-                          borderRadius: BorderRadius.circular(5.0),
+                    child: GestureDetector(
+                      onTap: (){
+                        _launchURL(getlinklist[index].value);
+    },
+                      child: Container(
+                        width: 200,
+                        child: Card(
+                            elevation: 10,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                           Container(
+                             width: 50,
+                             child: iconslist[index],
+
+                           ),
+
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                height: 100,
+                                width: 0.5,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Center(
+                                child: Text(getlinklist[index].key),
+                              )
+                            ],
+                          )
                         ),
 
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-
-
-                         Container(
-                           width: 50,
-                           child: iconslist[index],
-
-                         ),
-
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Container(
-                              height: 100,
-                              width: 1,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Center(
-                              child: Text('sadsad'),
-                            )
-                          ],
-                        )
                       ),
-
                     ),
                   ),
                 ),
@@ -528,6 +555,14 @@ class forbody extends StatefulWidget{
 
             ],
           ),
+    Container(
+      width: 400,
+      height: 400,
+
+        child: Image.network('https://maps.googleapis.com/maps/api/staticmap?center=31.565%2C74.304&language=en&size=640x256&zoom=15&scale=1&channel=olx-latam-ar-web-dev&key=AIzaSyAChxbDof4fywIkC6U-7MCgXBpUp4t2DiA&signature=c-SAJkUdvOWkyl627rgM5nTwI5I=',
+            fit: BoxFit.fill),
+
+    ),
 
               
 
@@ -536,7 +571,15 @@ class forbody extends StatefulWidget{
     );
   }
 
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+    await launch(url);
+    } else {
+    throw 'Could not launch $url';
+    }
   }
+}
 
 // One entry in the multilevel list displayed by this app.
 class Entry {

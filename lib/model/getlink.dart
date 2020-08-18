@@ -1,6 +1,6 @@
 
 
-class getlink{
+ class getlink{
   String key,value;
   int asd;
 ///asdadad
