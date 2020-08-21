@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:aman_app/model/getlink.dart';
+import 'package:animated_splash/animated_splash.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
@@ -681,6 +682,33 @@ class EntryItem extends StatelessWidget {
 }
 
 void main() {
+
+
+  Function duringSplash = () {
+    print('Something background process');
+    int a = 123 + 23;
+    print(a);
+
+    if (a > 100)
+      return 1;
+    else
+      return 2;
+  };
+
+  Map<int, Widget> op = {1: ExpansionTileSample()};
+
+  runApp(MaterialApp(
+    home: AnimatedSplash(
+      imagePath: 'assets/images/anchor.png',
+      home: ExpansionTileSample(),
+      customFunction: duringSplash,
+      duration: 2500,
+      type: AnimatedSplashType.BackgroundProcess,
+      outputAndHome: op,
+    ),
+  ));
+
+
 
   runApp(ExpansionTileSample());
 }
