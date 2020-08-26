@@ -1,10 +1,14 @@
 
 
- class getlink{
+ import 'package:flutter/cupertino.dart';
+
+class getlink{
   String key,value;
   int asd;
+  Widget test;
 ///asdadad
   ///dasdasda
-  getlink(this.key, this.value);
+  getlink.a1(this.key,this.test);
+  getlink(this.key,this.value);
 
 }
