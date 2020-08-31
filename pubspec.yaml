@@ -40,6 +40,7 @@ dependencies:
   flutter_widget_from_html: ^0.4.3
   flutter_easyloading: ^1.1.4
   page_indicator: ^0.3.0
+  slimy_card: ^1.0.4
 
 dev_dependencies:
   flutter_test:
