@@ -18,7 +18,7 @@ class page1states extends State<page1> {
   @override
   void initState() {
     gettitlelist.add(getlink.a1('Home',ExpansionTileSample()));
-    gettitlelist.add(getlink.a1('Exercise',Exercise()));
+    gettitlelist.add(getlink.a1('Exercise',Exercise(0)));
     gettitlelist.add(getlink.a1('Service & Support',null));
     gettitlelist.add(getlink.a1('Participants',null));
     gettitlelist.add(getlink.a1('Organizers',null));

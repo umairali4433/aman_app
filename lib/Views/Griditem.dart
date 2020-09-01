@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'Exercise.dart';
+
 class Griditem extends StatelessWidget {
 
   final String title;
@@ -15,7 +17,7 @@ class Griditem extends StatelessWidget {
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => t),
+          MaterialPageRoute(builder: (context) => asd('sgfdsf')),
         );
       },
       child: Column(

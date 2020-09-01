@@ -1,7 +1,8 @@
 import 'dart:core';
 
 import 'package:aman_app/Views/Login.dart';
-import 'package:aman_app/model/chotewalaadeel.dart';
+import 'package:aman_app/Views/showdatalist.dart';
+import 'package:aman_app/model/getlist.dart';
 import 'package:aman_app/model/getlink.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,21 +10,35 @@ import 'package:flutter/widgets.dart';
 
 
 
+class asd extends StatelessWidget {
+  String getthis;
+  asd(this.getthis);
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
 
 class Exercise extends StatefulWidget {
-  sub createState() => sub();
+  String get;
+  Exercise(get);
+  sub createState() => sub(get);
+
 }
 class sub extends State<Exercise>{
-  List<loru> getalldatalist = [];
+  List<getlist> getalldatalist = [];
+  String get;
+  sub(get);
 
   @override
   void initState() {
+    print(get);
     List<String> get1 = ['Harbour Phase','Sea Phase'];
     List<String> get2 = ['Opening Ceremony','Reception Dinner','IMC','Band Display & CT Demo','Food Gala & cultural show','IFR(internal fleet review)'];
     List<String> get3 = ['Events','Date & time'];
-   getalldatalist.add(loru('Activities',get1));
-    getalldatalist.add(loru('Events',get2));
-    getalldatalist.add(loru('Scedule',get3));
+   getalldatalist.add(getlist('Activities',get1));
+    getalldatalist.add(getlist('Events',get2));
+    getalldatalist.add(getlist('Scedule',get3));
   }
 
 
@@ -74,19 +89,30 @@ class sub extends State<Exercise>{
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
                             itemCount: getalldatalist[int].getlinklist.length,
-                            itemBuilder: (BuildContext context, int2) => Container(
+                            itemBuilder: (BuildContext context, int2) =>
+
+
+                                GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => showdatalist('sdfsdfs')),
+                                    );
+                                  },
+                                  child: Container(
                               margin: EdgeInsets.only(bottom: 10),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  color: Theme.of(context).primaryColor),
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    color: Theme.of(context).primaryColor),
                               child: Padding(
-                                padding: EdgeInsets.all(9),
-                                child: Text(
-                                  getalldatalist[int].getlinklist[int2],
-                                  style: TextStyle(color: Colors.white,fontSize: 15),
-                                ),
+                                  padding: EdgeInsets.all(9),
+                                  child: Text(
+                                    getalldatalist[int].getlinklist[int2],
+                                    style: TextStyle(color: Colors.white,fontSize: 15),
+                                  ),
                               ),
-                            )
+                            ),
+                                )
                         ),
                       ),
 
