@@ -1,8 +1,6 @@
 import 'dart:core';
 
-import 'package:aman_app/Views/Login.dart';
-import 'package:aman_app/model/chotewalaadeel.dart';
-import 'package:aman_app/model/getlink.dart';
+import 'package:aman_app/model/getlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,38 +17,38 @@ class Exercise extends StatefulWidget {
 class sub extends State<Exercise>{
   String getval;
   sub(this.getval);
-  List<loru> getalldatalist = [];
+  List<getlist> getalldatalist = [];
   @override
   void initState() {
    if(getval =="0"){
      List<String> get1 = ['Harbour Phase','Sea Phase'];
      List<String> get2 = ['Opening Ceremony','Reception Dinner','IMC','Band Display & CT Demo','Food Gala & cultural show','IFR(internal fleet review)'];
      List<String> get3 = ['Events','Date & time'];
-     getalldatalist.add(loru('Activities',get1));
-     getalldatalist.add(loru('Events',get2));
-     getalldatalist.add(loru('Scedule',get3));
+     getalldatalist.add(getlist('Activities',get1));
+     getalldatalist.add(getlist('Events',get2));
+     getalldatalist.add(getlist('Scedule',get3));
    }
    else if(getval =="1"){
      List<String> get1 = ['Harbour Facilities','Logistics','Admin Assistance','Berth','Tugs','Pilots'];
-     getalldatalist.add(loru('Service & Support',get1));
+     getalldatalist.add(getlist('Service & Support',get1));
    }
    else if(getval =="2"){
    }
    else if(getval =="3"){
      List<String> get1 = ['Speakers','Leaders'];
-     getalldatalist.add(loru('Organizers',get1));
+     getalldatalist.add(getlist('Organizers',get1));
    }
    else if(getval ==4){
      List<String> get1 = ['Speakers','Leaders'];
-     getalldatalist.add(loru('Organizers',get1));
+     getalldatalist.add(getlist('Organizers',get1));
    }
    else if(getval ==5){
      List<String> get1 = ['Speakers','Leaders'];
-     getalldatalist.add(loru('Organizers',get1));
+     getalldatalist.add(getlist('Organizers',get1));
    }
    else if(getval ==6){
      List<String> get1 = ['Official Callender','FLoor Plan','Media Partners'];
-     getalldatalist.add(loru('Misc',get1));
+     getalldatalist.add(getlist('Misc',get1));
    }
 
 
