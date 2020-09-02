@@ -35,7 +35,6 @@ class sub extends State<Exercise>{
      getalldatalist.add(loru('Service & Support',get1));
    }
    else if(getval =="2"){
-
    }
    else if(getval =="3"){
      List<String> get1 = ['Speakers','Leaders'];
