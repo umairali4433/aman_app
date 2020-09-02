@@ -11,19 +11,50 @@ import 'package:flutter/widgets.dart';
 
 
 class Exercise extends StatefulWidget {
-  sub createState() => sub();
+
+  String get;
+  Exercise(this.get);
+  sub createState() => sub(get);
 }
 class sub extends State<Exercise>{
+  String getval;
+  sub(this.getval);
   List<loru> getalldatalist = [];
-
   @override
   void initState() {
-    List<String> get1 = ['Harbour Phase','Sea Phase'];
-    List<String> get2 = ['Opening Ceremony','Reception Dinner','IMC','Band Display & CT Demo','Food Gala & cultural show','IFR(internal fleet review)'];
-    List<String> get3 = ['Events','Date & time'];
-   getalldatalist.add(loru('Activities',get1));
-    getalldatalist.add(loru('Events',get2));
-    getalldatalist.add(loru('Scedule',get3));
+   if(getval =="0"){
+     List<String> get1 = ['Harbour Phase','Sea Phase'];
+     List<String> get2 = ['Opening Ceremony','Reception Dinner','IMC','Band Display & CT Demo','Food Gala & cultural show','IFR(internal fleet review)'];
+     List<String> get3 = ['Events','Date & time'];
+     getalldatalist.add(loru('Activities',get1));
+     getalldatalist.add(loru('Events',get2));
+     getalldatalist.add(loru('Scedule',get3));
+   }
+   else if(getval =="1"){
+     List<String> get1 = ['Harbour Facilities','Logistics','Admin Assistance','Berth','Tugs','Pilots'];
+     getalldatalist.add(loru('Service & Support',get1));
+   }
+   else if(getval =="2"){
+
+   }
+   else if(getval =="3"){
+     List<String> get1 = ['Speakers','Leaders'];
+     getalldatalist.add(loru('Organizers',get1));
+   }
+   else if(getval ==4){
+     List<String> get1 = ['Speakers','Leaders'];
+     getalldatalist.add(loru('Organizers',get1));
+   }
+   else if(getval ==5){
+     List<String> get1 = ['Speakers','Leaders'];
+     getalldatalist.add(loru('Organizers',get1));
+   }
+   else if(getval ==6){
+     List<String> get1 = ['Official Callender','FLoor Plan','Media Partners'];
+     getalldatalist.add(loru('Misc',get1));
+   }
+
+
   }
 
 
@@ -61,7 +92,6 @@ class sub extends State<Exercise>{
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Container(
-
                           color: Colors.black54,
 
                           child: Text(getalldatalist[int].key,style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.bold),)),
