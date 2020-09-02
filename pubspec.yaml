@@ -41,6 +41,7 @@ dependencies:
   flutter_easyloading: ^1.1.4
   page_indicator: ^0.3.0
   slimy_card: ^1.0.4
+  flutter_spinkit: "^4.1.2"
 
 dev_dependencies:
   flutter_test:

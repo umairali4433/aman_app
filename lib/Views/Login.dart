@@ -388,9 +388,6 @@ class _LoginSevenPageState extends State<LoginSevenPage> {
   Future<getusermodel> fetchUserData() async {
 
 
-
-
-
     Codec<String, String> stringToBase64 = utf8.fuse(base64);
 
     String encoded = stringToBase64.encode(emailtext.text+' '+password.text);
@@ -430,13 +427,6 @@ class _LoginSevenPageState extends State<LoginSevenPage> {
       //  EasyLoading.dismiss();
 
     }
-
-
-
-
-
-
-
   }
 
 
