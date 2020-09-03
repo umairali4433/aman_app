@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:aman_app/model/chatsdialogmodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Alluserslist.dart';
+import 'chat2.dart';
 
 class ChatUi extends StatefulWidget {
   chatsubstate createState() => chatsubstate();
@@ -27,6 +29,7 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
     getchats();
     super.initState();
   }
+
   ////asdasdasdsaddasdsd
 
   @override
@@ -102,17 +105,33 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
                 Expanded(
                   child: ListView.builder(
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          chatdialoglist[index].user1Email,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        subtitle: Text(chatdialoglist[index].lastMessage,
-                            style: TextStyle(color: Colors.white)),
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              'https://aman.paknavy.gov.pk/images/logo.png'),
-                        ),
+                      return Column(
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ChatTwoPage()),
+                              );
+                            },
+                            child: ListTile(
+                              title: Text(
+                                chatdialoglist[index].user1Email,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              subtitle: Text(chatdialoglist[index].lastMessage,
+                                  style: TextStyle(color: Colors.white)),
+                              leading: CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    'https://aman.paknavy.gov.pk/images/logo.png'),
+                              ),
+                            ),
+                          ),
+                          Divider(
+                            color: Colors.white.withOpacity(.2),
+                            height: 0.5,
+                          )
+                        ],
                       );
                     },
                     itemCount: chatdialoglist.length,
@@ -124,18 +143,16 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
   }
 
   Future<void> getchats() async {
-    Codec<String, String> stringToBase64 = utf8.fuse(base64);
-
-    String encoded = stringToBase64.encode('wahid@wahid.com 123');
+    final ore = await SharedPreferences.getInstance();
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Basic ' + encoded,
+      'Authorization': 'Basic ' + ore.getString('counter'),
     };
 
     final response = await http.get(
-      'http://sarosh-001-site1.itempurl.com/api/dialogs/1398',
+      'http://sarosh-001-site1.itempurl.com/api/dialogs/' + ore.getString('id'),
       headers: requestHeaders,
     );
 
@@ -143,7 +160,6 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
       print("you are not authorized user");
     } else if (response.statusCode == 200) {
       var responseJson = json.decode(response.body);
-
       for (var u in responseJson) {
         chatsdialogmodel post = chatsdialogmodel(
             u['dialogId'].toString(),

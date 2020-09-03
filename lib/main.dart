@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:animated_splash/animated_splash.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
 
@@ -63,8 +64,11 @@ class Mainpage extends State<MyApp> {
 
                 color: Colors.black54,
                 child: ListTile(
-                  leading: Image.network(
-                      'https://aman.paknavy.gov.pk/images/logo.png'),
+                  leading: CachedNetworkImage(
+                    imageUrl: "https://aman.paknavy.gov.pk/images/logo.png",
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                   title: Text(
                     'EXERCISE AMAN 2019',
 

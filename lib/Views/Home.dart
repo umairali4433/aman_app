@@ -9,6 +9,7 @@ import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
@@ -116,6 +117,9 @@ class mainstate extends State<forbody>with TickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
+    getdata();
+
+
 
     getlinklist.add(getlink('Weather Forecast \n(February, 2019)','https://www.accuweather.com/en/pk/karachi/261158/month/261158?monyr=2/01/2019'));
     getlinklist.add(getlink('Medical\nFacilities\nKarachi\n  ','http://www.karachisnob.com/hospitals-clinics-karachi.htm'));
@@ -581,6 +585,11 @@ class mainstate extends State<forbody>with TickerProviderStateMixin{
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  void getdata() async {
+    final ore = await SharedPreferences.getInstance();
+    print(ore.getString('counter'));
   }
 }
 

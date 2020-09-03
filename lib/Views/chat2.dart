@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 /**
  * Author: Damodar Lohani
  * profile: https://github.com/lohanidamodar
  */
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatTwoPage extends StatefulWidget {
   static final String path = "lib/src/pages/misc/chat2.dart";
@@ -30,6 +34,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
   @override
   void initState() {
     super.initState();
+    getchats();
     _controller = TextEditingController();
   }
 
@@ -145,6 +150,35 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
         SizedBox(width: current ? 20.0 : 30.0),
       ],
     );
+  }
+
+  void getchats() async {
+    final ore = await SharedPreferences.getInstance();
+
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Basic ' + ore.getString('counter'),
+    };
+    var params = {
+      "userid1": "1398",
+      "userid2": "1399"
+    };
+
+
+    Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/messages/imessage");
+
+    final newURI = uri.replace(queryParameters: params);
+
+    var response = await http.get(newURI, headers:requestHeaders );
+
+    if (response == 401){
+      print('error');
+    }
+    else if(response == 200){
+      print('sdfsf');
+    }
+
   }
 }
 

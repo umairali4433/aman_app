@@ -102,6 +102,7 @@ class sub extends State<Exercise>{
                             scrollDirection: Axis.horizontal,
                             itemCount: getalldatalist[int].getlinklist.length,
                             itemBuilder: (BuildContext context, int2) => Container(
+
                               margin: EdgeInsets.only(bottom: 10),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30.0),
