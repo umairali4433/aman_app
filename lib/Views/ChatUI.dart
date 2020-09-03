@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aman_app/main.dart';
 /**
  * Author: Siddhartha Joshi
  * profile: https://github.com/cimplesid
@@ -19,6 +20,7 @@ class ChatUi extends StatefulWidget {
 }
 
 class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<chatsdialogmodel> chatdialoglist = [];
   static final String path = "lib/src/pages/misc/chatui.dart";
 
@@ -29,12 +31,10 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
     getchats();
     super.initState();
   }
-
-  ////asdasdasdsaddasdsd
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -111,7 +111,7 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
                             onTap: (){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ChatTwoPage()),
+                                MaterialPageRoute(builder: (context) => ChatTwoPage(chatdialoglist[index].dialogId)),
                               );
                             },
                             child: ListTile(
@@ -144,38 +144,57 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
 
   Future<void> getchats() async {
     final ore = await SharedPreferences.getInstance();
-
-    Map<String, String> requestHeaders = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Basic ' + ore.getString('counter'),
-    };
-
-    final response = await http.get(
-      'http://sarosh-001-site1.itempurl.com/api/dialogs/' + ore.getString('id'),
-      headers: requestHeaders,
-    );
-
-    if (response.statusCode == 401) {
-      print("you are not authorized user");
-    } else if (response.statusCode == 200) {
-      var responseJson = json.decode(response.body);
-      for (var u in responseJson) {
-        chatsdialogmodel post = chatsdialogmodel(
-            u['dialogId'].toString(),
-            u['user1Email'].toString(),
-            u['user2Email'].toString(),
-            u['lastMessage'].toString());
-        chatdialoglist.add(post);
-      }
-
-      setState(() {
-        hasData = false;
-      });
-
-      //EasyLoading.showSuccess("Logged in");
-
-      //  EasyLoading.dismiss();
+    if (ore.getString('counter') == null){
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text('Please sign in first'),
+      duration: Duration(seconds: 3),
+    ));
+//      Future.delayed(Duration(seconds: 3));
+//      Navigator.push(
+//        context,
+//        MaterialPageRoute(builder: (context) => MyApp()),
+//      );
     }
+    else{
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Basic ' + ore.getString('counter'),
+      };
+      final response = await http.get(
+        'http://sarosh-001-site1.itempurl.com/api/dialogs/' + ore.getString('id'),
+        headers: requestHeaders,
+      );
+
+      if (response.statusCode == 401) {
+        print("you are not authorized user");
+      } else if (response.statusCode == 200) {
+        var responseJson = json.decode(response.body);
+        for (var u in responseJson) {
+          var getid = '';
+          if((ore.getString('id')!=u['user1Id'].toString())){
+          getid =u['user1Id'].toString();
+          }
+          else if(ore.getString('id')!=u['user2Id'].toString()){
+            getid =u['user2Id'].toString();
+          }
+          chatsdialogmodel post = chatsdialogmodel(
+              getid,
+              u['user1Email'].toString(),
+              u['user2Email'].toString(),
+              u['lastMessage'].toString());
+          chatdialoglist.add(post);
+        }
+
+        setState(() {
+          hasData = false;
+        });
+
+        //EasyLoading.showSuccess("Logged in");
+
+        //  EasyLoading.dismiss();
+      }
+    }
+
   }
 }

@@ -47,7 +47,7 @@ class _AllusersState extends State<Allusers>  with SingleTickerProviderStateMixi
                       onTap: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ChatTwoPage()),
+                          MaterialPageRoute(builder: (context) => ChatTwoPage('')),
                         );
                       },
                       child: ListTile(
@@ -102,6 +102,7 @@ class _AllusersState extends State<Allusers>  with SingleTickerProviderStateMixi
       var responseJson = json.decode(response.body);
 
       for (var u in responseJson) {
+
         chatsdialogmodel post = chatsdialogmodel.a1(
             u['name'].toString(), u['email'].toString(), u['levels']);
         getalluserlist.add(post);

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aman_app/model/chatsdialogmodel.dart';
 /**
  * Author: Damodar Lohani
  * profile: https://github.com/lohanidamodar
@@ -10,13 +11,22 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatTwoPage extends StatefulWidget {
+  var get  = '';
+  ChatTwoPage(this.get);
+
   static final String path = "lib/src/pages/misc/chat2.dart";
   @override
-  _ChatTwoPageState createState() => _ChatTwoPageState();
+  _ChatTwoPageState createState() => _ChatTwoPageState(get);
 }
 
 //asdadasdasd
 class _ChatTwoPageState extends State<ChatTwoPage> {
+  var get = '';
+  _ChatTwoPageState(this.get);
+
+  List<chatsdialogmodel> getchatslist = [];
+  var getid = '';
+  var check = true;
   String text;
   TextEditingController _controller;
   final List<Message> messages = [
@@ -46,18 +56,17 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       ),
       body: Column(
         children: <Widget>[
-          Expanded(
+          check? Text('wait'):  Expanded(
             child: ListView.separated(
               physics: BouncingScrollPhysics(),
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 10.0);
               },
               reverse: true,
-              itemCount: messages.length,
+              itemCount: getchatslist.length,
               itemBuilder: (BuildContext context, int index) {
-                Message m = messages[index];
-                if (m.user == 0) return _buildMessageRow(m, current: true);
-                return _buildMessageRow(m, current: false);
+                if (getchatslist[index].user1Email == '1398') return _buildMessageRow(getchatslist[index].dialogId, current: true);
+                return _buildMessageRow(getchatslist[index].dialogId, current: false);
               },
             ),
           ),
@@ -66,7 +75,6 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       ),
     );
   }
-
   Container _buildBottomBar(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -117,7 +125,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
     });
   }
 
-  Row _buildMessageRow(Message message, {bool current}) {
+  Row _buildMessageRow(String message, {bool current}) {
     return Row(
       mainAxisAlignment:
       current ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -138,7 +146,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
               color: current ? Theme.of(context).primaryColor : Colors.white,
               borderRadius: BorderRadius.circular(10.0)),
           child: Text(
-            message.description,
+            message,
             style: TextStyle(
                 color: current ? Colors.white : Colors.black, fontSize: 18.0),
           ),
@@ -154,15 +162,15 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
 
   void getchats() async {
     final ore = await SharedPreferences.getInstance();
-
+    getid = ore.getString('id');
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Basic ' + ore.getString('counter'),
     };
     var params = {
-      "userid1": "1398",
-      "userid2": "1399"
+      "userid1": getid,
+      "userid2": get
     };
 
 
@@ -170,13 +178,23 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
 
     final newURI = uri.replace(queryParameters: params);
 
-    var response = await http.get(newURI, headers:requestHeaders );
+    var response = await http.post(newURI, headers:requestHeaders, body: json.encode(params));
 
-    if (response == 401){
+    if (response.statusCode == 401){
       print('error');
     }
-    else if(response == 200){
-      print('sdfsf');
+    else if(response.statusCode == 200){
+      var responseJson = json.decode(response.body);
+      for (var u in responseJson) {
+        chatsdialogmodel post = chatsdialogmodel.a1(
+            u['text'].toString(), u['senderId'].toString(), u['receiverId'].toString());
+        getchatslist.add(post);
+      }
+      print(getchatslist);
+      setState(() {
+        check = false;
+      });
+
     }
 
   }
