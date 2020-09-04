@@ -52,6 +52,8 @@ class Mainpage extends State<MyApp> {
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
+                colorFilter: ColorFilter.mode(
+                    Colors.blueGrey.shade900.withOpacity(0.5), BlendMode.color),
                 image: AssetImage('assets/images/background.jpeg'),
                 fit: BoxFit.cover)),
         constraints: BoxConstraints.expand(),
@@ -76,7 +78,7 @@ class Mainpage extends State<MyApp> {
                 ),
               ),
               SizedBox(
-                height: 25,
+                height: 65,
               ),
               Expanded(
                 child: PageIndicatorContainer(

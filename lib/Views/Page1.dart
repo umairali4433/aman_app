@@ -1,5 +1,7 @@
+import 'package:aman_app/Views/Gallery.dart';
 import 'package:aman_app/model/getlink.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../main.dart';
 import 'Exercise.dart';
@@ -16,15 +18,15 @@ class page1states extends State<page1> {
   List<getlink> gettitlelist = [];
   @override
   void initState() {
-    gettitlelist.add(getlink.a1('Home',ExpansionTileSample()));
-    gettitlelist.add(getlink.a1('Exercise',Exercise('0')));
-    gettitlelist.add(getlink.a1('Service & Support',Exercise('1')));
-    gettitlelist.add(getlink.a1('Participants',null));
-    gettitlelist.add(getlink.a1('Organizers',null));
-    gettitlelist.add(getlink.a1('Misc',null));
-    gettitlelist.add(getlink.a1('Gallery',null));
-    gettitlelist.add(getlink.a1('Contact us',null));
-    gettitlelist.add(getlink.a1('Login/Logout',LoginSevenPage()));
+    gettitlelist.add(getlink.a1(Icon(Icons.home,size: 35,),'Home',ExpansionTileSample()));
+    gettitlelist.add(getlink.a1(Icon(Icons.accessibility_new,size: 35),'Exercise',Exercise('0')));
+    gettitlelist.add(getlink.a1(Icon(Icons.security,size: 35),'Service & Support',Exercise('1')));
+    gettitlelist.add(getlink.a1(Icon(Icons.people_outline,size: 35),'Participants',Exercise('2')));
+    gettitlelist.add(getlink.a1(Icon(Icons.assignment_ind,size: 35),'Organizers',Exercise('3')));
+    gettitlelist.add(getlink.a1(Icon(Icons.verified_user,size: 35),'Misc',Exercise('6')));
+    gettitlelist.add(getlink.a1(Icon(Icons.image,size: 35),'Gallery',Gallery()));
+    gettitlelist.add(getlink.a1(Icon(Icons.contacts,size: 35),'Contact us',Exercise('5')));
+    gettitlelist.add(getlink.a1(Icon(Icons.exit_to_app,size: 35),'Login/Logout',LoginSevenPage()));
 
 
     super.initState();
@@ -38,7 +40,7 @@ class page1states extends State<page1> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             childAspectRatio: 10/10,
             crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 60),
-        itemBuilder: (context, index) => Griditem(gettitlelist[index].key,gettitlelist[index].test),
+        itemBuilder: (context, index) => Griditem(gettitlelist[index].icon,gettitlelist[index].key,gettitlelist[index].test),
         itemCount: gettitlelist.length,
       ),
     );

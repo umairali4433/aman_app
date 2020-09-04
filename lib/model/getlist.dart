@@ -1,7 +1,7 @@
 class getlist{
 
-  String key;
+  String key,image,titile;
   List<String> getlinklist;
 
-  getlist(this.key, this.getlinklist);
+  getlist(this.titile,this.image,this.key, this.getlinklist);
 }
