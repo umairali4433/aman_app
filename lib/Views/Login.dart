@@ -218,6 +218,7 @@ class _LoginSevenPageState extends State<LoginSevenPage>
       final responseJson = json.decode(response.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('counter', encoded);
+      await prefs.setString('useremail', responseJson['email'].toString());
       await prefs.setString('id', responseJson['id'].toString());
       _btnController.success();
       Navigator.push(

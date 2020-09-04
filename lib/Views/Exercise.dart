@@ -53,8 +53,6 @@ class sub extends State<Exercise>{
   }
 
 
-
-
   final Color primary = Color(0xff7b7517);
   final Color background = Color(0xff2f2f4f);
   final Color overlay = Color(0xff212129);

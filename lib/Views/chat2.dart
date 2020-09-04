@@ -55,18 +55,23 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
         title: Text("Chat"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           check? Text('wait'):  Expanded(
             child: ListView.separated(
+
+
+              shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 10.0);
               },
-              reverse: true,
               itemCount: getchatslist.length,
               itemBuilder: (BuildContext context, int index) {
                 if (getchatslist[index].user1Email == '1398') return _buildMessageRow(getchatslist[index].dialogId, current: true);
                 return _buildMessageRow(getchatslist[index].dialogId, current: false);
+                //masla kya aa raha ha??
               },
             ),
           ),
@@ -119,12 +124,9 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
   _save() async {
     if (_controller.text.isEmpty) return;
     FocusScope.of(context).requestFocus(FocusNode());
-    setState(() {
-      messages.insert(0, Message(rand.nextInt(2), _controller.text));
-      _controller.clear();
-    });
-  }
+    sendmessage(_controller.text.toString());
 
+  }
   Row _buildMessageRow(String message, {bool current}) {
     return Row(
       mainAxisAlignment:
@@ -159,7 +161,6 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       ],
     );
   }
-
   void getchats() async {
     final ore = await SharedPreferences.getInstance();
     getid = ore.getString('id');
@@ -172,7 +173,6 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       "userid1": getid,
       "userid2": get
     };
-
 
     Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/messages/imessage");
 
@@ -197,6 +197,48 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
 
     }
 
+
+  }
+
+  Future<void> sendmessage(String message) async {
+    final ore = await SharedPreferences.getInstance();
+    getid = ore.getString('id');
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Basic ' + ore.getString('counter'),
+    };
+    int getin = int.parse(get);
+    int getin2 = int.parse(getid);
+    var params = {
+      "dialogId":-1,
+      "messageType":1,
+      "text":message,
+      "mediaUrl":null,
+      "fileName":null,
+      "receiverId":getin,
+      "senderId":getin2,
+      "time":null,
+      "status":null,
+      "createdAt":null,
+      "updatedAt":null,
+    };
+
+    Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/messages/");
+
+
+    var response = await http.post(uri, headers:requestHeaders, body: json.encode(params));
+
+    if (response.statusCode == 401){
+      print('error');
+    }
+    else if(response.statusCode == 201){
+      setState(() {
+        getchatslist.add(chatsdialogmodel.a1(message,getid,get));
+        _controller.text = 'Aa';
+      });
+
+    }
   }
 }
 

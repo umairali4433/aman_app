@@ -156,6 +156,7 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
 //      );
     }
     else{
+
       Map<String, String> requestHeaders = {
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -171,6 +172,11 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
       } else if (response.statusCode == 200) {
         var responseJson = json.decode(response.body);
         for (var u in responseJson) {
+
+
+
+
+
           var getid = '';
           if((ore.getString('id')!=u['user1Id'].toString())){
           getid =u['user1Id'].toString();
