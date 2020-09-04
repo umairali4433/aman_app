@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
+import 'ChatUI.dart';
 import 'Exercise.dart';
 import 'Griditem.dart';
 import 'Home.dart';
@@ -27,8 +28,7 @@ class page1states extends State<page1> {
     gettitlelist.add(getlink.a1(Icon(Icons.image,size: 35),'Gallery',Gallery()));
     gettitlelist.add(getlink.a1(Icon(Icons.contacts,size: 35),'Contact us',Exercise('5')));
     gettitlelist.add(getlink.a1(Icon(Icons.exit_to_app,size: 35),'Login/Logout',LoginSevenPage()));
-
-
+    gettitlelist.add(getlink.a1(Icon(Icons.chat,size: 35),'Chat',ChatUi()));
     super.initState();
     
   }
