@@ -81,9 +81,7 @@ class Mainpage extends State<MyApp> {
                   subtitle: Text('Together for Peace',style: TextStyle(color: Colors.white),),
                 ),
               ),
-              SizedBox(
-                height: 65,
-              ),
+
               Expanded(
                 child: PageIndicatorContainer(
                   align: IndicatorAlign.bottom,

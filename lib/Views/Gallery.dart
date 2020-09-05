@@ -67,6 +67,7 @@ class Gallery extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Gallery'),
+        backgroundColor: Colors.blueGrey.shade900,
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -76,28 +77,34 @@ class Gallery extends StatelessWidget {
             childAspectRatio: 1),
         itemBuilder: (context, index) {
           return Card(
+
+            color: Colors.grey,
               elevation: 6,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Image.network(
-                imagesList[index],
-                scale: 1.0,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.grey,
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes
-                          : null,
-                    ),
-                  );
-                },
+                  side: new BorderSide(color: Colors.blueGrey.shade900, width: 1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  imagesList[index],
+                  scale: 1.0,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blueGrey.shade900),
+                        backgroundColor: Colors.grey.shade400,
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes
+                            : null,
+                      ),
+                    );
+                  },
+                ),
               ),
           );
         },

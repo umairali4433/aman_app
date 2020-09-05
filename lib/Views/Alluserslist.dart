@@ -26,9 +26,10 @@ class _AllusersState extends State<Allusers>  with SingleTickerProviderStateMixi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF363846),
+      backgroundColor: Colors.blueGrey.shade900,
       appBar: AppBar(
         title: Text('All Users'),
+        backgroundColor: Colors.blueGrey.shade900,
       ),
       body: hasData
           ? Center(
@@ -47,7 +48,7 @@ class _AllusersState extends State<Allusers>  with SingleTickerProviderStateMixi
                       onTap: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => ChatTwoPage('')),
+                          MaterialPageRoute(builder: (context) => ChatTwoPage(getalluserlist[index].lastMessage)),
                         );
                       },
                       child: ListTile(
@@ -103,8 +104,8 @@ class _AllusersState extends State<Allusers>  with SingleTickerProviderStateMixi
 
       for (var u in responseJson) {
 
-        chatsdialogmodel post = chatsdialogmodel.a1(
-            u['name'].toString(), u['email'].toString(), u['levels']);
+        chatsdialogmodel post = chatsdialogmodel(
+            u['name'].toString(), u['email'].toString(), u['levels'],u['id'].toString());
         getalluserlist.add(post);
       }
       setState(() {

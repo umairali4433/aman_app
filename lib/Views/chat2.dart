@@ -13,7 +13,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ChatTwoPage extends StatefulWidget {
   var get  = '';
   ChatTwoPage(this.get);
-
   static final String path = "lib/src/pages/misc/chat2.dart";
   @override
   _ChatTwoPageState createState() => _ChatTwoPageState(get);
@@ -25,6 +24,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
   _ChatTwoPageState(this.get);
 
   List<chatsdialogmodel> getchatslist = [];
+  List<chatsdialogmodel> reversedList = [];
   var getid = '';
   var check = true;
   String text;
@@ -53,6 +53,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Chat"),
+        backgroundColor: Colors.blueGrey.shade900,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -60,17 +61,16 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
         children: <Widget>[
           check? Text('wait'):  Expanded(
             child: ListView.separated(
-
-
+              reverse: true,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
               separatorBuilder: (context, index) {
                 return const SizedBox(height: 10.0);
               },
-              itemCount: getchatslist.length,
+              itemCount: reversedList.length,
               itemBuilder: (BuildContext context, int index) {
-                if (getchatslist[index].user1Email == '1398') return _buildMessageRow(getchatslist[index].dialogId, current: true);
-                return _buildMessageRow(getchatslist[index].dialogId, current: false);
+                if (reversedList[index].user1Email == '1398') return _buildMessageRow(reversedList[index].dialogId, current: true);
+                return _buildMessageRow(reversedList[index].dialogId, current: false);
                 //masla kya aa raha ha??
               },
             ),
@@ -113,7 +113,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
           ),
           IconButton(
             icon: Icon(Icons.send),
-            color: Theme.of(context).primaryColor,
+            color: Colors.blueGrey.shade900,
             onPressed: _save,
           )
         ],
@@ -145,7 +145,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
             horizontal: 16.0,
           ),
           decoration: BoxDecoration(
-              color: current ? Theme.of(context).primaryColor : Colors.white,
+              color: current ? Colors.blueGrey.shade900 : Colors.white,
               borderRadius: BorderRadius.circular(10.0)),
           child: Text(
             message,
@@ -190,7 +190,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
             u['text'].toString(), u['senderId'].toString(), u['receiverId'].toString());
         getchatslist.add(post);
       }
-      print(getchatslist);
+      reversedList = new List.from(getchatslist.reversed);
       setState(() {
         check = false;
       });
@@ -199,6 +199,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
 
 
   }
+
 
   Future<void> sendmessage(String message) async {
     final ore = await SharedPreferences.getInstance();

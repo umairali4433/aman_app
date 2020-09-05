@@ -34,9 +34,14 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Chats'),
+        backgroundColor: Colors.blueGrey.shade900,
+      ),
       key: _scaffoldKey,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: Colors.blueGrey.shade900,
         onPressed: () {
           Navigator.push(
             context,
@@ -44,7 +49,7 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
           );
         },
       ),
-      backgroundColor: Color(0xFF363846),
+      backgroundColor: Colors.blueGrey.shade900,
       body: hasData
           ? Center(
               child: SpinKitSquareCircle(
@@ -58,34 +63,6 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 20.0),
-                  child: Text(
-                    'Chats',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 26.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFF414350),
-                      borderRadius: BorderRadius.circular(5.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black54,
-                          offset: Offset(0.0, 1.5),
-                          blurRadius: 1.0,
-                          spreadRadius: -1.0,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                   child: TextField(
                     decoration: InputDecoration(
@@ -97,9 +74,17 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
                         fillColor: Color(0xFF414350),
                         suffixIcon: Icon(
                           Icons.search,
-                          color: Colors.white70,
+                          color: Colors.white54,
                         ),
-                        border: InputBorder.none),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                        borderSide: BorderSide(width: 1,color: Colors.white),
+                      ),
+                      border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(16.0),
+                        ),
+                      ),),
                   ),
                 ),
                 Expanded(
