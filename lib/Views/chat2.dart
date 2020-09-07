@@ -190,6 +190,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
             u['text'].toString(), u['senderId'].toString(), u['receiverId'].toString());
         getchatslist.add(post);
       }
+
       reversedList = new List.from(getchatslist.reversed);
       setState(() {
         check = false;
@@ -235,7 +236,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
     }
     else if(response.statusCode == 201){
       setState(() {
-        getchatslist.add(chatsdialogmodel.a1(message,getid,get));
+        reversedList.add(chatsdialogmodel.a1(message,getid,get));
         _controller.text = 'Aa';
       });
 
