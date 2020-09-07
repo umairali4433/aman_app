@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "820396932125",
+    "firebase_url": "https://aman-api-notification-service.firebaseio.com",
+    "project_id": "aman-api-notification-service",
+    "storage_bucket": "aman-api-notification-service.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820396932125:android:409de5a9c5cbd6f3671af4",
+        "android_client_info": {
+          "package_name": "com.example.aman_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820396932125-eeg24rortktj5qbusfumbgv9ujiev59r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABDsMLx_GUBjzx6Rznjqhiz5eOltVbLBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820396932125-eeg24rortktj5qbusfumbgv9ujiev59r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

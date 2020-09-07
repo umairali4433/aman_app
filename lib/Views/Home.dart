@@ -3,15 +3,12 @@
  * profile: https://github.com/sudeepthapa
  */
 import 'package:aman_app/model/getlink.dart';
-import 'package:animated_splash/animated_splash.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:circular_reveal_animation/circular_reveal_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+
 
 class ExpansionTileSample extends StatelessWidget {
   @override
@@ -19,55 +16,10 @@ class ExpansionTileSample extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('ExpansionTile'),
+          title: const Text('Home'),
           backgroundColor: Colors.blueGrey.shade900,
         ),
-        drawer: Drawer(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 28,
-              ),
-              Container(
-                  width: 100.0,
-                  height: 100.0,
-                  decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: new DecorationImage(
-                          fit: BoxFit.fill,
-                          image: new NetworkImage(
-                              "https://images.unsplash.com/photo-1596643111734-7729183fa628?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80")))),
-              Center(
-                child: Text("Aman!"),
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: 200.0,
-                  child: new ListView.builder(
-                    itemBuilder: (BuildContext context, int index) =>
-                        EntryItem(data[index]),
-                    itemCount: data.length,
-                  ),
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xff7c94b6),
-                  image: const DecorationImage(
-                    image: NetworkImage(
-                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 8,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ],
-          ),
-        ),
+
         body: forbody(),
       ),
     );
@@ -391,11 +343,7 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
               children: <Widget>[
                 Container(
                   child: const ListTile(
-                    leading: Icon(
-                      Icons.menu,
-                      size: 30,
-                      color: Colors.blueGrey,
-                    ),
+
                     title: Text('Concept & Objectives',
                         style: TextStyle(color: Colors.black)),
                   ),

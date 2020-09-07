@@ -15,7 +15,7 @@ class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderS
 
   @override
   void initState() {
-    getLatestData();
+   // getLatestData();
   }
 
   Future<void> getLatestData() async {
@@ -54,45 +54,20 @@ class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderS
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Colors.blueGrey.shade900.withOpacity(0.8),
-          Colors.blueGrey.shade900
-        ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
-        child: ListView.builder(
-            itemCount: getitemlist.length,
-            itemBuilder: (context, index) {
-              return bollcheck ?  Center(
-              child: SpinKitSquareCircle(
-              color: Colors.white,
-              size: 50.0,
-              controller: AnimationController(
-              vsync: this, duration: const Duration(milliseconds: 1200)),
-              )
-              ) : Image.network(
-                'https://i.pinimg.com/originals/a1/d9/11/a1d9118beba75f34c03e2cac36b39c9e.jpg',
-                scale: 1.0,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.white,
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes
-                          : null,
-                    ),
-                  );
-                },
-              );
-            }),
-      ),
+      body: ListView.builder(
+          itemCount: 8,
+          itemBuilder: (context, index) {
+            return  Column(
+              children: [
+               Image.asset('assets/images/background.jpeg'),
+                SizedBox(
+                  height: 150,
+                ),
+                Text('xfdds')
+
+              ],
+            );
+          }),
     );
   }
 }

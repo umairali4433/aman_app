@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:aman_app/main.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -74,16 +75,16 @@ class _LoginSevenPageState extends State<LoginSevenPage>
                       SizedBox(
                         height: 40,
                       ),
-                      Icon(
-                        Icons.fastfood,
-                        color: Colors.white,
-                        size: 60,
-                      ),
+//                      Icon(
+//                        Icons.fastfood,
+//                        color: Colors.white,
+//                        size: 60,
+//                      ),
                       SizedBox(
                         height: 20,
                       ),
                       Text(
-                        "Pak Navy",
+                        "Aman Exercise",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
@@ -216,6 +217,11 @@ class _LoginSevenPageState extends State<LoginSevenPage>
       Future.delayed(Duration(seconds: 1))
           .then((value) => _btnController.reset());
     } else if (response.statusCode == 200) {
+      FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+      _firebaseMessaging.getToken().then((token){
+        print("yeh rha token "+token);
+      });
       final responseJson = json.decode(response.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('counter', encoded);

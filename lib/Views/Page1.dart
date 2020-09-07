@@ -20,7 +20,7 @@ class page1states extends State<page1> {
   @override
   void initState() {
     gettitlelist.add(getlink.a1(Icon(Icons.home,size: 35,),'Home',ExpansionTileSample()));
-    gettitlelist.add(getlink.a1(Icon(Icons.accessibility_new,size: 35),'Exercise',Exercise('0')));
+    gettitlelist.add(getlink.a1(Icon(Icons.explicit,size: 35),'Exercise',Exercise('0')));
     gettitlelist.add(getlink.a1(Icon(Icons.security,size: 35),'Service & Support',Exercise('1')));
     gettitlelist.add(getlink.a1(Icon(Icons.people_outline,size: 35),'Participants',Exercise('2')));
     gettitlelist.add(getlink.a1(Icon(Icons.assignment_ind,size: 35),'Organizers',Exercise('3')));
