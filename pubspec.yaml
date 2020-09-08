@@ -45,11 +45,14 @@ dependencies:
   shared_preferences: ^0.5.10
   rounded_loading_button: ^1.0.13
   firebase_messaging: ^7.0.0
-  flutter_local_notifications: ^1.4.4+4
+  flutter_local_notifications: ^1.4.3
+  notification_permissions: ^0.4.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

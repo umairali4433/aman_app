@@ -1,5 +1,5 @@
 import 'package:aman_app/Views/Gallery.dart';
-import 'package:aman_app/Views/test.dart';
+import 'package:aman_app/Views/testing.dart';
 import 'package:aman_app/model/getlink.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'ChatUI.dart';
 import 'Exercise.dart';
 import 'Griditem.dart';
 import 'Home.dart';
+
 import 'Login.dart';
 
 class page1 extends StatefulWidget {
@@ -20,7 +21,7 @@ class page1states extends State<page1> {
   List<getlink> gettitlelist = [];
   @override
   void initState() {
-    gettitlelist.add(getlink.a1(Icon(Icons.home,size: 35,),'Home',HomePage()));
+    gettitlelist.add(getlink.a1(Icon(Icons.home,size: 35,),'Home',done()));
     gettitlelist.add(getlink.a1(Icon(Icons.explicit,size: 35),'Exercise',Exercise('0')));
     gettitlelist.add(getlink.a1(Icon(Icons.security,size: 35),'Service & Support',Exercise('1')));
     gettitlelist.add(getlink.a1(Icon(Icons.people_outline,size: 35),'Participants',Exercise('2')));

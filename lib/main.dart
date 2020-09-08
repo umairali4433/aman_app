@@ -12,6 +12,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_indicator/page_indicator.dart';
 import 'Views/Page1.dart';
+import 'package:aman_app/Views/NotificationsManager.dart';
 
 void main() {
   Function duringSplash = () {
@@ -42,6 +43,7 @@ class MyApp extends StatefulWidget {
 }
 
 class Mainpage extends State<MyApp> {
+  NotificationsManager notificationsManager = NotificationsManager();
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   PageController _pageController = PageController();
   double currentPage = 0;
@@ -102,15 +104,20 @@ class Mainpage extends State<MyApp> {
       ),
     );
   }
+  void _showNotification() {
 
+    notificationsManager.showNotifications();
+  }
   @override
   void initState() {
+    notificationsManager.initializeNotifications();
     _firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(
             sound: true, badge: true, alert: true, provisional: true));
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
+        _showNotification();
         print("onMessage: $message");
         //_showItemDialog(message);
       },
