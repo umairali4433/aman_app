@@ -217,11 +217,19 @@ class _LoginSevenPageState extends State<LoginSevenPage>
       Future.delayed(Duration(seconds: 1))
           .then((value) => _btnController.reset());
     } else if (response.statusCode == 200) {
+      bool _initialized = false;
       FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+      if (!_initialized) {
+        // For iOS request permission first.
+        _firebaseMessaging.requestNotificationPermissions();
+        _firebaseMessaging.configure();
 
-      _firebaseMessaging.getToken().then((token){
-        print("yeh rha token "+token);
-      });
+        // For testing purposes print the Firebase Messaging token
+        String token = await _firebaseMessaging.getToken();
+        print("FirebaseMessaging token: $token");
+
+        _initialized = true;
+      }
       final responseJson = json.decode(response.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('counter', encoded);

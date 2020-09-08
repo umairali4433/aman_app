@@ -4,9 +4,8 @@
 
 import 'package:animated_splash/animated_splash.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -43,6 +42,7 @@ class MyApp extends StatefulWidget {
 }
 
 class Mainpage extends State<MyApp> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   PageController _pageController = PageController();
   double currentPage = 0;
 
@@ -60,9 +60,7 @@ class Mainpage extends State<MyApp> {
         child: SafeArea(
           child: Column(
             children: <Widget>[
-
               Container(
-
                 color: Colors.black54,
                 child: ListTile(
                   leading: CachedNetworkImage(
@@ -107,6 +105,39 @@ class Mainpage extends State<MyApp> {
 
   @override
   void initState() {
+    _firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(
+            sound: true, badge: true, alert: true, provisional: true));
+
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        //_showItemDialog(message);
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+       // _navigateToItemDetail(message);
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+      //  _navigateToItemDetail(message);
+      },
+    );
+
+    _firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings settings) {
+      print("Settings registered: $settings");
+    });
+    _firebaseMessaging.getToken().then((String token) {
+      assert(token != null);
+      setState(() {
+      //  _homeScreenText = "Push Messaging token: $token";
+      });
+     // print(_homeScreenText);
+    });
+
+
+
     _pageController.addListener(() {
       setState(() {
         currentPage = _pageController.page;
