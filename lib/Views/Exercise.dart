@@ -165,7 +165,7 @@ class sub extends State<Exercise> {
                                   ),
                                 ),
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShowListItem()));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShowListItem(getalldatalist[int].getlinklist[int2])));
                                 },
                               ),
                               SizedBox(
