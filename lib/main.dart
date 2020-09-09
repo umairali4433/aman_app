@@ -111,6 +111,7 @@ class Mainpage extends State<MyApp> {
   @override
   void initState() {
     notificationsManager.initializeNotifications();
+
     _firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(
             sound: true, badge: true, alert: true, provisional: true));

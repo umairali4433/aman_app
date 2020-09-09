@@ -24,9 +24,15 @@ class NotificationsManager {
         initializationSettingsAndroid, initializationSettingsIOS);
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     _flutterLocalNotificationsPlugin.initialize(initializationSettings).then((value) => _showDailyAtTime());
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
 
+        onSelectNotification: onSelectNotification);
     return _flutterLocalNotificationsPlugin;
+
   }
+
 
   FlutterLocalNotificationsPlugin getCurrentNotificationPlugin() {
     return _flutterLocalNotificationsPlugin;
@@ -94,4 +100,13 @@ class NotificationsManager {
     return notificationMessages[Random().nextInt(notificationMessages.length)];
   }
 
+
+  Future onSelectNotification(String payload) {
+//    MaterialPageRoute(builder: (context) => SelectionScreen()),
+//    Navigator.push(
+//    context,
+//    MaterialPageRoute(builder: (context) => Allusers()),
+//    );
+//    print('fdgfdg');
+  }
 }
