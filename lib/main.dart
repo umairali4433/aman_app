@@ -104,9 +104,9 @@ class Mainpage extends State<MyApp> {
       ),
     );
   }
-  void _showNotification() {
+  void _showNotification(Map<String, dynamic> message) {
 
-    notificationsManager.showNotifications();
+    notificationsManager.showNotifications(message);
   }
   @override
   void initState() {
@@ -117,8 +117,10 @@ class Mainpage extends State<MyApp> {
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        _showNotification();
-        print("onMessage: $message");
+        _showNotification(message);
+        print("onMessage:$message");
+        print("yeh mera:"+message['notification']['title']);
+
         //_showItemDialog(message);
       },
       onLaunch: (Map<String, dynamic> message) async {

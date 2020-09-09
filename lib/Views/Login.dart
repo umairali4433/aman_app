@@ -11,21 +11,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginSevenPage extends StatefulWidget {
   static final String path = "lib/src/pages/login/login7.dart";
-
   @override
   _LoginSevenPageState createState() => _LoginSevenPageState();
 }
-
 class _LoginSevenPageState extends State<LoginSevenPage>
     with TickerProviderStateMixin {
   @override
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
-
   void initState() {
     super.initState();
   }
-
   final emailtext = TextEditingController();
 
   final password = TextEditingController();

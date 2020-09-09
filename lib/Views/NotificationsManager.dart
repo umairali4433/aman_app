@@ -39,8 +39,8 @@ class NotificationsManager {
     _showDailyAtTime();
   }
 
-  void showNotifications() {
-    _showNotification();
+  void showNotifications(Map<String, dynamic> message) {
+    _showNotification(message);
   }
   void requestPermission() {
     NotificationPermissions.requestNotificationPermissions();
@@ -78,7 +78,7 @@ class NotificationsManager {
         platformChannelSpecifics);
   }
 
-  Future<void> _showNotification() async {
+  Future<void> _showNotification(Map<String, dynamic> message) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'flutter_notif', 'flutter_notif', 'Show notification',
         importance: Importance.Max, priority: Priority.High, ticker: 'ticker');
@@ -86,7 +86,7 @@ class NotificationsManager {
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await _flutterLocalNotificationsPlugin.show(
-        0, 'plain title', 'plain body', platformChannelSpecifics,
+        0, message['notification']['title'], message['notification']['body'], platformChannelSpecifics,
         payload: 'item x');
   }
 

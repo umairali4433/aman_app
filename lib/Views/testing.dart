@@ -59,10 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     notificationsManager.initializeNotifications();
   }
-  void _showNotification() {
-
-    notificationsManager.showNotifications();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _showNotification,
+
         tooltip: 'ShowNotification',
         child: Icon(Icons.notifications_active),
       ), // This trailing comma makes auto-formatting nicer for build methods.
