@@ -16,6 +16,7 @@ class LoginSevenPage extends StatefulWidget {
 }
 class _LoginSevenPageState extends State<LoginSevenPage>
     with TickerProviderStateMixin {
+
   @override
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
@@ -200,8 +201,6 @@ class _LoginSevenPageState extends State<LoginSevenPage>
     final response = await http.get(
       'http://sarosh-001-site1.itempurl.com/api/users/auth',
       headers: requestHeaders,
-
-
     );
 
     if (response.statusCode == 401) {
@@ -212,7 +211,9 @@ class _LoginSevenPageState extends State<LoginSevenPage>
       ));
       Future.delayed(Duration(seconds: 1))
           .then((value) => _btnController.reset());
-    } else if (response.statusCode == 200) {
+    }
+    else if (response.statusCode == 200) {
+    String token = '';
       bool _initialized = false;
       FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
       if (!_initialized) {
@@ -221,7 +222,7 @@ class _LoginSevenPageState extends State<LoginSevenPage>
         _firebaseMessaging.configure();
 
         // For testing purposes print the Firebase Messaging token
-        String token = await _firebaseMessaging.getToken();
+        token = await _firebaseMessaging.getToken();
         print("FirebaseMessaging token: $token");
 
         _initialized = true;
@@ -231,6 +232,40 @@ class _LoginSevenPageState extends State<LoginSevenPage>
       await prefs.setString('counter', encoded);
       await prefs.setString('useremail', responseJson['email'].toString());
       await prefs.setString('id', responseJson['id'].toString());
+
+
+      ////////////////////
+      var params = {
+        "id": responseJson['id'].toString(),
+        "name": "",
+        "rank": "",
+        "email": "",
+        "country": "",
+        "password": "",
+        "levels": "",
+        "status": "",
+        "token": token,
+      };
+
+      Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/users/RegisterToken");
+
+      final newURI = uri.replace(queryParameters: params);
+
+      var response2 = await http.post(newURI, headers:requestHeaders, body: json.encode(params));
+
+      if (response2.statusCode == 401){
+        print('error');
+      }
+      else if(response2.statusCode == 200){
+
+        print('200');
+
+      }
+
+
+      ////////////////////
+
+
       _btnController.success();
       Navigator.push(
         context,

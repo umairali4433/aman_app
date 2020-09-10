@@ -20,7 +20,7 @@ class Griditem extends StatelessWidget {
         children: <Widget>[
           Flexible(
             child: CircleAvatar(
-              radius: 50,
+              radius: 30,
               backgroundColor: Colors.blueGrey.shade900.withOpacity(0.9),
               child: icon,
             ),
@@ -28,14 +28,15 @@ class Griditem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Colors.black54,
+              color: Colors.black.withOpacity(0.8),
             ),
             padding: EdgeInsets.symmetric(vertical: 2),
             height: 35,
             child: Center(
                 child: Text(title,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+
                     softWrap: true)),
           )
         ],

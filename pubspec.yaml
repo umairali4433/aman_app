@@ -47,6 +47,7 @@ dependencies:
   firebase_messaging: ^7.0.0
   flutter_local_notifications: ^1.4.3
   notification_permissions: ^0.4.4
+  flare_splash_screen: ^3.0.1
 
 dev_dependencies:
   flutter_test:

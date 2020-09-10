@@ -6,6 +6,7 @@ import 'package:aman_app/model/chatsdialogmodel.dart';
  * profile: https://github.com/lohanidamodar
  */
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,29 +56,45 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
         title: Text("Chat"),
         backgroundColor: Colors.blueGrey.shade900,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
+      body: Stack(
         children: <Widget>[
-          check? Text('wait'):  Expanded(
-            child: ListView.separated(
-              reverse: true,
-              shrinkWrap: true,
-              physics: BouncingScrollPhysics(),
-              separatorBuilder: (context, index) {
-                return const SizedBox(height: 10.0);
-              },
-              itemCount: reversedList.length,
-              itemBuilder: (BuildContext context, int index) {
-                if (reversedList[index].user1Email == '1398') return _buildMessageRow(reversedList[index].dialogId, current: true);
-                return _buildMessageRow(reversedList[index].dialogId, current: false);
-                //masla kya aa raha ha??
-              },
-            ),
+          Image.asset(
+            "assets/images/backgroundchat.jpeg",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
           ),
-          _buildBottomBar(context),
+          check? Center(
+            child: SpinKitSquareCircle(
+              color: Colors.blueGrey.shade900,
+              size: 50.0,
+            ),
+          ):Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+                Expanded(
+                child: ListView.separated(
+                  reverse: true,
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 10.0);
+                  },
+                  itemCount: reversedList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    if (reversedList[index].user1Email == getid) return _buildMessageRow(reversedList[index].dialogId, current: true);
+                    return _buildMessageRow(reversedList[index].dialogId, current: false);
+                    //masla kya aa raha ha??
+                  },
+                ),
+              ),
+              _buildBottomBar(context),
+            ],
+          ),
+
         ],
-      ),
+      )
     );
   }
   Container _buildBottomBar(BuildContext context) {
@@ -139,18 +156,20 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
 
           const SizedBox(width: 5.0),
         ],
-        Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8.0,
-            horizontal: 16.0,
-          ),
-          decoration: BoxDecoration(
-              color: current ? Colors.blueGrey.shade900 : Colors.white,
-              borderRadius: BorderRadius.circular(10.0)),
-          child: Text(
-            message,
-            style: TextStyle(
-                color: current ? Colors.white : Colors.black, fontSize: 18.0),
+        Flexible(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 16.0,
+            ),
+            decoration: BoxDecoration(
+                color: current ? Colors.blueGrey.shade900 : Colors.white,
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Text(
+              message,
+              style: TextStyle(
+                  color: current ? Colors.white : Colors.black, fontSize: 18.0),
+            ),
           ),
         ),
         if (current) ...[
@@ -183,6 +202,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
     if (response.statusCode == 401){
       print('error');
     }
+
     else if(response.statusCode == 200){
       var responseJson = json.decode(response.body);
       for (var u in responseJson) {
@@ -190,7 +210,6 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
             u['text'].toString(), u['senderId'].toString(), u['receiverId'].toString());
         getchatslist.add(post);
       }
-
       reversedList = new List.from(getchatslist.reversed);
       setState(() {
         check = false;
@@ -236,7 +255,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
     }
     else if(response.statusCode == 201){
       setState(() {
-        reversedList.add(chatsdialogmodel.a1(message,getid,get));
+        reversedList.insert(0, chatsdialogmodel.a1(message,getid,get));
         _controller.text = 'Aa';
       });
 

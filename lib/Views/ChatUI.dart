@@ -158,10 +158,6 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
         var responseJson = json.decode(response.body);
         for (var u in responseJson) {
 
-
-
-
-
           var getid = '';
           if((ore.getString('id')!=u['user1Id'].toString())){
           getid =u['user1Id'].toString();

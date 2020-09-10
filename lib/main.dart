@@ -5,6 +5,7 @@
 import 'package:animated_splash/animated_splash.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flare_splash_screen/flare_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
@@ -15,28 +16,27 @@ import 'Views/Page1.dart';
 import 'package:aman_app/Views/NotificationsManager.dart';
 
 void main() {
-  Function duringSplash = () {
-    print('Something background process');
-    int a = 123 + 23;
-    print(a);
+  runApp(Splash());
+}
 
-    if (a > 100)
-      return 1;
-    else
-      return 2;
-  };
-  Map<int, Widget> op = {1: MyApp()};
+class Splash extends StatefulWidget {
+  @override
+  _SplashState createState() => _SplashState();
+}
 
-  runApp(MaterialApp(
-    home: AnimatedSplash(
-      imagePath: 'assets/images/anchor.png',
-      home: MyApp(),
-      customFunction: duringSplash,
-      duration: 2500,
-      type: AnimatedSplashType.BackgroundProcess,
-      outputAndHome: op,
-    ),
-  ));
+class _SplashState extends State<Splash> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen.navigate(
+          name: 'assets/images/Amann.flr',
+          next: (_) => MyApp(),
+          until: () => Future.delayed(Duration(seconds: 4)),
+          startAnimation: 'Untitled',
+          fit: BoxFit.fill,
+        ));
+  }
 }
 class MyApp extends StatefulWidget {
   Mainpage createState() => Mainpage();
@@ -110,7 +110,7 @@ class Mainpage extends State<MyApp> {
   }
   @override
   void initState() {
-    notificationsManager.initializeNotifications();
+    notificationsManager.initializeNotifications(context);
 
     _firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(
@@ -145,9 +145,6 @@ class Mainpage extends State<MyApp> {
       });
      // print(_homeScreenText);
     });
-
-
-
     _pageController.addListener(() {
       setState(() {
         currentPage = _pageController.page;

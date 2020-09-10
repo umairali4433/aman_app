@@ -1,38 +1,61 @@
 import 'dart:math';
 
+import 'package:aman_app/Views/Home.dart';
+import 'package:aman_app/Views/Login.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_permissions/notification_permissions.dart';
 
+import 'chat2.dart';
+
 class NotificationsManager {
+  Map<String, dynamic> messageget;
 
   NotificationsManager._internal();
-  static final NotificationsManager _shared =  NotificationsManager._internal();
-  static final List<String> notificationMessages = ['Test1...', "Test 2","Test 3"];
+
+  static final NotificationsManager _shared = NotificationsManager._internal();
+  static final List<String> notificationMessages = [
+    'Test1...',
+    "Test 2",
+    "Test 3"
+  ];
 
   FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
-
 
   factory NotificationsManager() {
     return _shared;
   }
 
-  FlutterLocalNotificationsPlugin initializeNotifications() {
-
-    var initializationSettingsAndroid = AndroidInitializationSettings('ic_launcher');
+  Future<FlutterLocalNotificationsPlugin> initializeNotifications(BuildContext context) async {
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('ic_launcher');
     var initializationSettingsIOS = IOSInitializationSettings();
     var initializationSettings = InitializationSettings(
         initializationSettingsAndroid, initializationSettingsIOS);
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    _flutterLocalNotificationsPlugin.initialize(initializationSettings).then((value) => _showDailyAtTime());
+    _flutterLocalNotificationsPlugin
+        .initialize(initializationSettings)
+        .then((value) => _showDailyAtTime());
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        FlutterLocalNotificationsPlugin();
 
-        onSelectNotification: onSelectNotification);
+    await  flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: (String payload) async {
+          if (payload != null) {
+            debugPrint('notification payload: ' + payload);
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ChatTwoPage(messageget['data']['senderId'])),
+            );
+
+          }
+        });
+
+
     return _flutterLocalNotificationsPlugin;
-
   }
-
 
   FlutterLocalNotificationsPlugin getCurrentNotificationPlugin() {
     return _flutterLocalNotificationsPlugin;
@@ -41,6 +64,7 @@ class NotificationsManager {
   void cancelNotificationWith(int id) {
     _flutterLocalNotificationsPlugin.cancel(id);
   }
+
   void scheduleDailyNotifications() {
     _showDailyAtTime();
   }
@@ -48,9 +72,11 @@ class NotificationsManager {
   void showNotifications(Map<String, dynamic> message) {
     _showNotification(message);
   }
+
   void requestPermission() {
     NotificationPermissions.requestNotificationPermissions();
   }
+
   /// Checks the notification permission status
   Future<bool> getCheckNotificationPermStatus() {
     return NotificationPermissions.getNotificationPermissionStatus()
@@ -67,6 +93,7 @@ class NotificationsManager {
       }
     });
   }
+
   Future<void> _showDailyAtTime() async {
     var time = const Time(10, 0, 0);
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
@@ -76,38 +103,30 @@ class NotificationsManager {
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await _flutterLocalNotificationsPlugin.showDailyAtTime(
-        999,
-        'flutter_notif',
-        _getNotificationMessage(),
-        time,
-        platformChannelSpecifics);
+    await _flutterLocalNotificationsPlugin.showDailyAtTime(999, 'flutter_notif',
+        _getNotificationMessage(), time, platformChannelSpecifics);
   }
 
   Future<void> _showNotification(Map<String, dynamic> message) async {
+    messageget = message;
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'flutter_notif', 'flutter_notif', 'Show notification',
         importance: Importance.Max, priority: Priority.High, ticker: 'ticker');
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await _flutterLocalNotificationsPlugin.show(
-        0, message['notification']['title'], message['notification']['body'], platformChannelSpecifics,
-        payload: 'item x');
+if(message['notification']['title'] != null){
+  await _flutterLocalNotificationsPlugin.show(
+      0,
+      message['notification']['title'],
+      message['notification']['body'],
+      platformChannelSpecifics,
+      payload: 'item x');
+}
   }
 
   String _getNotificationMessage() {
     return notificationMessages[Random().nextInt(notificationMessages.length)];
   }
 
-
-
-  Future onSelectNotification(String payload) {
-//    MaterialPageRoute(builder: (context) => SelectionScreen()),
-//    Navigator.push(
-//    context,
-//    MaterialPageRoute(builder: (context) => Allusers()),
-//    );
-//    print('fdgfdg');
-  }
 }
