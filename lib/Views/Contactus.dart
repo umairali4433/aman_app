@@ -19,7 +19,7 @@ class _contactusState extends State<contactus> {
 
   @override
   void initState() {
-    getchats();
+   // getchats();
     super.initState();
   }
 
@@ -31,13 +31,7 @@ class _contactusState extends State<contactus> {
         title: Text('Contact Us'),
       ),
       key: _scaffoldKey,
-      body: hasData
-          ? Center(
-              child: SpinKitSquareCircle(
-                color: Colors.blueGrey.shade900,
-                size: 50.0,
-              ),
-            )
+      body
           : Column(
               children: <Widget>[
                 Image.asset(
@@ -62,7 +56,7 @@ class _contactusState extends State<contactus> {
                         SizedBox(
                           width: 67,
                         ),
-                        Text(name),
+                        Text('Wahid'),
                       ],
                     ),
                   ),
@@ -82,7 +76,7 @@ class _contactusState extends State<contactus> {
                         SizedBox(
                           width: 20,
                         ),
-                        Text(desg),
+                        Text("Am"),
                       ],
                     ),
                   ),
@@ -102,7 +96,7 @@ class _contactusState extends State<contactus> {
                         SizedBox(
                           width: 35,
                         ),
-                        Text(telephone),
+                        Text('021-31258745'),
                         Spacer(),
                         IconButton(
                           onPressed: () {},
@@ -130,7 +124,7 @@ class _contactusState extends State<contactus> {
                         SizedBox(
                           width: 75,
                         ),
-                        Text(email),
+                        Text('Wahid@gmail.com'),
                         Spacer(),
                         IconButton(
                           onPressed: () {},

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aman_app/Views/Login.dart';
 import 'package:aman_app/main.dart';
 /**
  * Author: Siddhartha Joshi
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:aman_app/model/chatsdialogmodel.dart';
+import 'package:aman_app/Views/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Alluserslist.dart';
@@ -130,15 +132,12 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
   Future<void> getchats() async {
     final ore = await SharedPreferences.getInstance();
     if (ore.getString('counter') == null){
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: Text('Please sign in first'),
-      duration: Duration(seconds: 3),
-    ));
-//      Future.delayed(Duration(seconds: 3));
-//      Navigator.push(
-//        context,
-//        MaterialPageRoute(builder: (context) => MyApp()),
-//      );
+      Future.delayed(Duration(seconds: 1));
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginSevenPage()),
+      );
     }
     else{
 

@@ -1,14 +1,16 @@
+import 'dart:convert';
+
 /**
  * Author: Sudip Thapa
  * profile: https://github.com/sudeepthapa
  */
 import 'package:aman_app/model/getlink.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_awesome_alert_box/flutter_awesome_alert_box.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-
 
 class ExpansionTileSample extends StatelessWidget {
   @override
@@ -31,9 +33,10 @@ class forbody extends StatefulWidget {
   mainstate createState() => mainstate();
 }
 
-class mainstate extends State<forbody> with TickerProviderStateMixin {
+  class mainstate extends State<forbody> with TickerProviderStateMixin {
   AnimationController animationController;
   Animation<double> animation;
+  var check = true;
   TabController _tabController;
   List<String> getgalerrieslist = [
     'https://aman.paknavy.gov.pk/images/AmanPicsHome/1.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -47,6 +50,7 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
   ];
 
   List<getlink> getlinklist = [];
+  List<String> getlinklistforslider  = [];
 
   List<Icon> iconslist = [
     Icon(Icons.cloud, size: 50, color: Colors.blueGrey.shade900),
@@ -58,28 +62,11 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
     Icon(Icons.filter_b_and_w, size: 50, color: Colors.blueGrey.shade900),
     Icon(Icons.switch_camera, size: 50, color: Colors.blueGrey.shade900),
   ];
-  Future<void> _launched;
-  List<String> list = [
-    'https://aman.paknavy.gov.pk/images/Slider/3.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/4.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/5.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/6.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/7.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/8.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/9.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/10.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/11.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/12.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/13.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/14.jpg',
-    'https://aman.paknavy.gov.pk/images/Slider/15.jpg'
-  ];
 
   @override
   void initState() {
     super.initState();
     getdata();
-
     getlinklist.add(getlink('Weather Forecast \n(February, 2019)',
         'https://www.accuweather.com/en/pk/karachi/261158/month/261158?monyr=2/01/2019'));
     getlinklist.add(getlink('Medical\nFacilities\nKarachi\n  ',
@@ -101,7 +88,7 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
         'https://en.wikipedia.org/wiki/Port_of_Karachi'));
     getlinklist.add(getlink('More\nAbout\nKarachi\n  ',
         'https://en.wikipedia.org/wiki/Port_of_Karachi'));
-    _tabController = new TabController(length: 4, vsync: this);
+    _tabController = new TabController(length: 7, vsync: this);
     animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000),
@@ -114,7 +101,14 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return
+      check? Center(
+        child: SpinKitSquareCircle(
+          color: Colors.blueGrey.shade900,
+          size: 50.0,
+        ),
+      ):
+      SingleChildScrollView(
       child: Column(children: <Widget>[
         Container(
           padding: EdgeInsets.only(top: 10.0),
@@ -126,7 +120,7 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
                 return new ClipRRect(
                   borderRadius: BorderRadius.circular(9.0),
                   child: Image.network(
-                    list[index],
+                      'http://'+getlinklistforslider[index],
                     fit: BoxFit.fill,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent loadingProgress) {
@@ -143,7 +137,7 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
                   ),
                 );
               },
-              itemCount: list.length,
+              itemCount: getlinklistforslider.length,
               viewportFraction: 0.8,
               scale: 0.9,
 
@@ -193,12 +187,21 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
           textAlign: TextAlign.center,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        RaisedButton(
+          onPressed: (){
+            SimpleAlertBox(context: context,title: 'Chief of the Naval Staff',infoMessage: 'Admiral Zafar Mahmood Abbasi NI(M) , Chief of the Naval Staff took charge on 07 October 2017. Admiral Zafar Mahmood Abbasi Nishan-i-Imtiaz (Military) joined Pakistan Navy on 13 January 1979 and undertook initial training at Britannia Royal Naval College Dartmouth, UK. The Admiral got commission in Operations Branch in June 1981 and won the coveted "SWORD OF HONOUR". During his distinguished career, the Admiral attained vast experience of Naval Operations, Training and Command assignments. His command appointments include Command of Surface ships, Commandant Pakistan Naval Academy, Commander 25th Destroyer Squadron, Command of Multi-National Combined Task Force 150 at HQ NAVCENT Bahrain, DG Pakistan Maritime Security Agency, Commander Coast, Commander Logistics and Commander Pakistan Fleet. Key staff appointments of the Admiral include Assistant Chief of Naval Staff (Plans), Chief Inspector (Navy), Deputy Chief of the Naval Staff (Operations) and Chief of the Staff at Naval Headquarters. The Admiral holds Masters degree in War Studies from National Defence University. He has also done Command & Staff Course from Royal Australian Navy Staff College.In recognition of his meritorious services, the Admiral has been awarded Nishan-i-Imtiaz (Military).',icon: Icons.info);
+          },
+
+          child: Text('More Details',style: TextStyle(color: Colors.white),),
+        ),
         SizedBox(
           height: 20.0,
         ),
         new Container(
           decoration: new BoxDecoration(color: Colors.blueGrey.shade900),
           child: new TabBar(
+            isScrollable: true,
+            labelStyle: TextStyle(fontSize: 13.0 ),
             indicatorColor: Colors.white,
             controller: _tabController,
             tabs: [
@@ -214,11 +217,20 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
               new Tab(
                 text: 'AMAN-13',
               ),
+              new Tab(
+                text: 'AMAN-11',
+              ),
+              new Tab(
+                text: 'AMAN-09',
+              ),
+              new Tab(
+                text: 'AMAN-07',
+              ),
             ],
           ),
         ),
         new Container(
-          height: 170.0,
+          height: 220.0,
           child: new TabBarView(
             controller: _tabController,
             children: <Widget>[
@@ -325,6 +337,87 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
                     ),
                   ],
                 )),
+              ),
+              Container(
+                color: Colors.blueGrey.shade900,
+                child: new Card(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                'Exercise AMAN-11',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(bottom: 10.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Flexible(
+                              child: Text(
+                                  'Exercise AMAN-11 was conducted from 8-12 March 2011 and 28 countries participated with naval assets and observers. Total 11 ships from Australia, China, France, Indonesia, Italy, Malaysia, Saudi Arabia and USA took part in exercise. Three aircraft from Australia & Japan and 03 SOF/EOD/Marines teams from China, Turkey and USA also participated during the exercise. Forty three observers of 26 countries participated in AMAN-11.'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+              Container(
+                color: Colors.blueGrey.shade900,
+                child: new Card(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                'Exercise AMAN-09',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Flexible(
+                            child: Text(
+                                'Exercise AMAN-09 was held in March 2009. During this Exercise 23 ships, 13 Aircrafts and 9 SOF teams of Australia, Bangladesh, China, France, Japan, Malaysia, UK and Nigeria, Turkey and USA participated. Observers from 27 countries also attended the exercise'),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+              Container(
+                color: Colors.blueGrey.shade900,
+                child: new Card(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                'Exercise AMAN-07',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Flexible(
+                            child: Text(
+                                'Exercise AMAN-07 was held in March 2007 which was a big success. During AMAN-07, 14 Ships of Bangladesh, China, France, Italy, Malaysia, UK and USA Navies participated. Besides, SOF/EOD teams from Bangladesh and Turkey also participated in SOF Exercises and 21 countries attended the Exercise as observer.'),
+                          ),
+                        ),
+                      ],
+                    )),
               )
             ],
           ),
@@ -507,6 +600,7 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
               SizedBox(
                 height: 150.0,
                 child: ListView.builder(
+
                   physics: ClampingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -580,8 +674,26 @@ class mainstate extends State<forbody> with TickerProviderStateMixin {
   }
 
   void getdata() async {
-    final ore = await SharedPreferences.getInstance();
-    print(ore.getString('counter'));
+    var response = await http.get('http://sarosh-001-site1.itempurl.com/filepaths/slider');
+
+    if (response.statusCode == 401){
+      print('error');
+    }
+
+    else if(response.statusCode == 200){
+      var responseJson = json.decode(response.body);
+      for (var u in responseJson) {
+
+        getlinklistforslider.add((u['path'].toString()));
+      }
+      setState(() {
+        check = false;
+      });
+
+
+    }
+
+
   }
 }
 

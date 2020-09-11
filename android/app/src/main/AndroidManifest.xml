@@ -13,15 +13,15 @@
 
         android:name="io.flutter.app.FlutterApplication"
         android:largeHeap="true"
-        android:label="aman_app"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Exercise Aman 2021"
+        android:icon="@drawable/realone.jpg">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize">h
 
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user

@@ -1,70 +1,33 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class Gallery extends StatelessWidget {
-  final List<String> imagesList = [
-    'https://aman.paknavy.gov.pk/images/aman19/01.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/02.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/003.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/04.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/005.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/006.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/007.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/08.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/09.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/010.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/011.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/012.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/013.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/014.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/015.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/016.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/017.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/018.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/019.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/020.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/021.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/022.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/023.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/024.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/025.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/026.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/027.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/028.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/031.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/032.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/033.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/034.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/035.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/036.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/037.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/038.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/039.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/040.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/041.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/042.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/043.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/044.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/045.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/046.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/047.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/048.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/049.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/050.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/051.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/052.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/053.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/054.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/055.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/056.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/057.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/058.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/059.jpg',
-    'https://aman.paknavy.gov.pk/images/aman19/060.jpg',
-  ];
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart' as http;
+
+class Gallery extends StatefulWidget {
+  @override
+  mainstate createState() => mainstate();
+}
+
+
+class mainstate extends State<Gallery> {
+  final List<String> imagesList = [];
+  List<String> getlinklistforslider  = [];
+  var check = true;
+  @override
+  void initState() {
+    getdata();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return check? Center(
+      child: SpinKitSquareCircle(
+        color: Colors.blueGrey.shade900,
+        size: 50.0,
+      ),
+    ):Scaffold(
       appBar: AppBar(
         title: Text('Gallery'),
         backgroundColor: Colors.blueGrey.shade900,
@@ -86,7 +49,7 @@ class Gallery extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  imagesList[index],
+                  'http://'+getlinklistforslider[index],
                   scale: 1.0,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -108,8 +71,29 @@ class Gallery extends StatelessWidget {
               ),
           );
         },
-        itemCount: imagesList.length,
+        itemCount: getlinklistforslider.length,
       ),
     );
+  }
+
+  void getdata() async {
+    var response = await http.get('http://sarosh-001-site1.itempurl.com/filepaths/slider');
+
+    if (response.statusCode == 401){
+      print('error');
+    }
+
+    else if(response.statusCode == 200){
+      var responseJson = json.decode(response.body);
+      for (var u in responseJson) {
+
+        getlinklistforslider.add((u['path'].toString()));
+      }
+      setState(() {
+        check = false;
+      });
+
+
+    }
   }
 }

@@ -111,6 +111,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
         vertical: 8.0,
         horizontal: 20.0,
       ),
+
       child: Row(
         children: <Widget>[
           Expanded(
@@ -219,9 +220,9 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
 
 
   }
-
-
   Future<void> sendmessage(String message) async {
+    reversedList.insert(0, chatsdialogmodel.a1(message,getid,get));
+    _controller.text = '';
     final ore = await SharedPreferences.getInstance();
     getid = ore.getString('id');
     Map<String, String> requestHeaders = {
@@ -256,7 +257,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
     else if(response.statusCode == 201){
       setState(() {
         reversedList.insert(0, chatsdialogmodel.a1(message,getid,get));
-        _controller.text = 'Aa';
+        _controller.text = '';
       });
 
     }

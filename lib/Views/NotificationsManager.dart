@@ -45,6 +45,7 @@ class NotificationsManager {
           if (payload != null) {
             debugPrint('notification payload: ' + payload);
 
+            Navigator.pop(context);
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ChatTwoPage(messageget['data']['senderId'])),
@@ -93,7 +94,6 @@ class NotificationsManager {
       }
     });
   }
-
   Future<void> _showDailyAtTime() async {
     var time = const Time(10, 0, 0);
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(

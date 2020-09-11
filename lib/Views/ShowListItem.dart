@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:aman_app/Views/Participants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
+import 'package:native_pdf_view/native_pdf_view.dart';
+
+import 'Pdfview.dart';
 
 class ShowListItem extends StatefulWidget {
   var ge  = '';
@@ -67,11 +71,30 @@ class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderS
           itemBuilder: (context, index) {
             return  Column(
               children: [
-
-               Image.asset('assets/images/123.png'),
-                SizedBox(
-                  height: 20,
+                (index%2==0)?Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Image.asset('assets/images/123.png')):
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyAppusermanual()),
+                        );
+                      },
+                      child: Container(
+                        width: 200,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          child: Center(child: Text('Pdfview'))),
+                    ),
+                Divider(
+                  height: 100,
                 ),
+
+
 
 
               ],

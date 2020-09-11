@@ -30,7 +30,7 @@ class _SplashState extends State<Splash> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashScreen.navigate(
-          name: 'assets/images/Amann.flr',
+          name: 'assets/images/Aman.flr',
           next: (_) => MyApp(),
           until: () => Future.delayed(Duration(seconds: 4)),
           startAnimation: 'Untitled',
@@ -47,60 +47,64 @@ class Mainpage extends State<MyApp> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   PageController _pageController = PageController();
   double currentPage = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: Stack(
+        children: [
+      Container(
         decoration: BoxDecoration(
             image: DecorationImage(
                 colorFilter: ColorFilter.mode(
                     Colors.blueGrey.shade900.withOpacity(0.5), BlendMode.color),
-                image: AssetImage('assets/images/background.jpeg'),
-                fit: BoxFit.cover)),
-        constraints: BoxConstraints.expand(),
-        child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Container(
-                color: Colors.black54,
-                child: ListTile(
-                  leading: CachedNetworkImage(
-                    imageUrl: "https://aman.paknavy.gov.pk/images/logo.png",
-                    placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                  title: Text(
-                    'EXERCISE AMAN 2019',
+                image: AssetImage('assets/images/realone.jpg'),
+                fit: BoxFit.fitWidth)),
 
-                    style: GoogleFonts.berkshireSwash(
-                      textStyle: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.bold,fontSize: 20),
-                    )
+      ),
+
+          Container(
+
+            constraints: BoxConstraints.expand(),
+            child: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    color: Colors.black54,
+                    child: ListTile(
+                      leading: CachedNetworkImage(
+                        imageUrl: "https://aman.paknavy.gov.pk/images/logo.png",
+                        placeholder: (context, url) => CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                      title: Text(
+                        'EXERCISE AMAN 2019',
+                        style: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.bold,fontSize: 20),
+                      ),
+                      subtitle: Text('Together for Peace',style: TextStyle(color: Colors.white),),
+                    ),
                   ),
-                  subtitle: Text('Together for Peace',style: TextStyle(color: Colors.white),),
-                ),
+
+                  Expanded(
+                    child: PageIndicatorContainer(
+                      align: IndicatorAlign.bottom,
+                      length: 1,
+                      indicatorSpace: 10.0,
+                      child: PageView(
+                        controller: _pageController,
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          page1(),
+
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
+            ),
+          )
 
-              Expanded(
-                child: PageIndicatorContainer(
-                  align: IndicatorAlign.bottom,
-                  length: 4,
-                  indicatorSpace: 10.0,
-                  child: PageView(
-                    controller: _pageController,
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      page1(),
-                      page1(),
-                      page1(),
-                      page1(),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }
