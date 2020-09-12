@@ -32,7 +32,7 @@ class _SplashState extends State<Splash> {
         home: SplashScreen.navigate(
           name: 'assets/images/Aman.flr',
           next: (_) => MyApp(),
-          until: () => Future.delayed(Duration(seconds: 4)),
+          until: () => Future.delayed(Duration(milliseconds: 0)),
           startAnimation: 'Untitled',
           fit: BoxFit.fill,
         ));
@@ -52,15 +52,26 @@ class Mainpage extends State<MyApp> {
     return Scaffold(
       body: Stack(
         children: [
+
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    colorFilter: ColorFilter.mode(
+                        Colors.blueGrey.shade900.withOpacity(0.5), BlendMode.color),
+                    image: AssetImage('assets/images/backgroundnewone.jpg'),
+                    fit: BoxFit.cover)),
+
+          ),
       Container(
         decoration: BoxDecoration(
             image: DecorationImage(
                 colorFilter: ColorFilter.mode(
                     Colors.blueGrey.shade900.withOpacity(0.5), BlendMode.color),
-                image: AssetImage('assets/images/realone.jpg'),
+                image: AssetImage('assets/images/realone.png'),
                 fit: BoxFit.fitWidth)),
 
       ),
+
 
           Container(
 
@@ -77,7 +88,7 @@ class Mainpage extends State<MyApp> {
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                       title: Text(
-                        'EXERCISE AMAN 2019',
+                        'EXERCISE AMAN 2021',
                         style: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.bold,fontSize: 20),
                       ),
                       subtitle: Text('Together for Peace',style: TextStyle(color: Colors.white),),

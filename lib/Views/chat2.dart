@@ -11,6 +11,8 @@ import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'ChatUI.dart';
+
 class ChatTwoPage extends StatefulWidget {
   var get  = '';
   ChatTwoPage(this.get);
@@ -51,50 +53,53 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Chat"),
-        backgroundColor: Colors.blueGrey.shade900,
-      ),
-      body: Stack(
-        children: <Widget>[
-          Image.asset(
-            "assets/images/backgroundchat.jpeg",
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-          ),
-          check? Center(
-            child: SpinKitSquareCircle(
-              color: Colors.blueGrey.shade900,
-              size: 50.0,
+    return WillPopScope(
+      onWillPop: callmethod(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Chat"),
+          backgroundColor: Colors.blueGrey.shade900,
+        ),
+        body: Stack(
+          children: <Widget>[
+            Image.asset(
+              "assets/images/backgroundchat.jpeg",
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
             ),
-          ):Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-                Expanded(
-                child: ListView.separated(
-                  reverse: true,
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 10.0);
-                  },
-                  itemCount: reversedList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (reversedList[index].user1Email == getid) return _buildMessageRow(reversedList[index].dialogId, current: true);
-                    return _buildMessageRow(reversedList[index].dialogId, current: false);
-                    //masla kya aa raha ha??
-                  },
-                ),
+            check? Center(
+              child: SpinKitSquareCircle(
+                color: Colors.blueGrey.shade900,
+                size: 50.0,
               ),
-              _buildBottomBar(context),
-            ],
-          ),
+            ):Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                  Expanded(
+                  child: ListView.separated(
+                    reverse: true,
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(height: 10.0);
+                    },
+                    itemCount: reversedList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (reversedList[index].user1Email == getid) return _buildMessageRow(reversedList[index].dialogId, current: true);
+                      return _buildMessageRow(reversedList[index].dialogId, current: false);
+                      //masla kya aa raha ha??
+                    },
+                  ),
+                ),
+                _buildBottomBar(context),
+              ],
+            ),
 
-        ],
-      )
+          ],
+        )
+      ),
     );
   }
   Container _buildBottomBar(BuildContext context) {
@@ -261,6 +266,14 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       });
 
     }
+  }
+
+  callmethod() {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ChatUi()),
+    );
   }
 }
 

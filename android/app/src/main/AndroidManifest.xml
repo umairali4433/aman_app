@@ -14,7 +14,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:largeHeap="true"
         android:label="Exercise Aman 2021"
-        android:icon="@drawable/realone.jpg">
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -24,6 +24,8 @@ class ChatUi extends StatefulWidget {
 class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<chatsdialogmodel> chatdialoglist = [];
+  List<chatsdialogmodel> filteredUsers = [];
+  List<chatsdialogmodel> clonelist = [];
   static final String path = "lib/src/pages/misc/chatui.dart";
 
   var hasData = true;
@@ -33,6 +35,12 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
     getchats();
     super.initState();
   }
+
+  @override
+  void didChangeDependencies() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +95,25 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
                           const Radius.circular(16.0),
                         ),
                       ),),
+                    onChanged: (string){
+                      setState(() {
+                        filteredUsers  =  clonelist
+                            .where((u) => (u.user1Email
+                            .toLowerCase()
+                            .contains(string.toLowerCase()) ||
+                            u.user2Email.toLowerCase().contains(string.toLowerCase())))
+                            .toList();
+                        chatdialoglist = filteredUsers;
+                      });
+                      if(string == ''){
+                        chatdialoglist = clonelist;
+                      }
+
+
+
+                    },
                   ),
+
                 ),
                 Expanded(
                   child: ListView.builder(
@@ -156,8 +182,17 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
       } else if (response.statusCode == 200) {
         var responseJson = json.decode(response.body);
         for (var u in responseJson) {
+          var getid = '',getemail = '';
 
-          var getid = '';
+          if((ore.getString('useremail')==u['user1Email'].toString())){
+            getemail =u['user2Email'].toString();
+          }
+          if((ore.getString('useremail')==u['user2Email'].toString())){
+            getemail =u['user1Email'].toString();
+          }
+
+
+
           if((ore.getString('id')!=u['user1Id'].toString())){
           getid =u['user1Id'].toString();
           }
@@ -166,11 +201,13 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
           }
           chatsdialogmodel post = chatsdialogmodel(
               getid,
-              u['user1Email'].toString(),
+              getemail,
               u['user2Email'].toString(),
               u['lastMessage'].toString());
           chatdialoglist.add(post);
         }
+        filteredUsers = chatdialoglist;
+        clonelist = chatdialoglist;
 
         setState(() {
           hasData = false;

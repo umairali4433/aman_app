@@ -44,7 +44,6 @@ class NotificationsManager {
         onSelectNotification: (String payload) async {
           if (payload != null) {
             debugPrint('notification payload: ' + payload);
-
             Navigator.pop(context);
             Navigator.push(
               context,

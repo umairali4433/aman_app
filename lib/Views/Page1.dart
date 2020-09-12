@@ -11,6 +11,7 @@ import 'Exercise.dart';
 import 'Griditem.dart';
 import 'Home.dart';
 
+import 'Leaders.dart';
 import 'Login.dart';
 import 'Participants.dart';
 import 'Webviewlogin.dart';
@@ -28,7 +29,7 @@ class page1states extends State<page1> {
     gettitlelist.add(getlink.a1(Icon(Icons.explicit,size: 35,color: Colors.white,),'Exercise',Exercise('0')));
     gettitlelist.add(getlink.a1(Icon(Icons.security,size: 35,color: Colors.white,),'Service & Support',Exercise('1')));
     gettitlelist.add(getlink.a1(Icon(Icons.people_outline,size: 35,color: Colors.white,),'Participants',Participants()));
-    gettitlelist.add(getlink.a1(Icon(Icons.assignment_ind,size: 35,color: Colors.white,),'Organizers',Exercise('3')));
+    gettitlelist.add(getlink.a1(Icon(Icons.assignment_ind,size: 35,color: Colors.white,),'Organizers',Leaders()));
     gettitlelist.add(getlink.a1(Icon(Icons.verified_user,size: 35,color: Colors.white,),'Misc',Exercise('6')));
     gettitlelist.add(getlink.a1(Icon(Icons.image,size: 35,color: Colors.white,),'Gallery',Gallery()));
     gettitlelist.add(getlink.a1(Icon(Icons.contacts,size: 35,color: Colors.white,),'Contact us',contactus()));
