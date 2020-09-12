@@ -41,7 +41,6 @@ class _SplashState extends State<Splash> {
 class MyApp extends StatefulWidget {
   Mainpage createState() => Mainpage();
 }
-
 class Mainpage extends State<MyApp> {
   NotificationsManager notificationsManager = NotificationsManager();
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
