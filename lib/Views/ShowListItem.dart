@@ -136,14 +136,33 @@ class _ShowListItemState extends State<ShowListItem>  with TickerProviderStateMi
                     _launchInWebViewOrVC(getitemlist[index].path);
 
                   },
-                  child: Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Center(child: Text(getitemlist[index].fileName))),
+                    child: Container(
+                        width: 200,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Center(
+                              child: Container(
+                                child: Expanded(
+                                  child: Icon(
+                                    Icons.text_fields,
+                                  ),
+
+                                ),
+
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(getitemlist[index].fileName)
+                          ],
+                        )),
                 ):
                     GestureDetector(
                       onTap: (){
@@ -156,7 +175,24 @@ class _ShowListItemState extends State<ShowListItem>  with TickerProviderStateMi
                             color: Colors.grey.shade200,
                             borderRadius: BorderRadius.circular(30.0),
                           ),
-                          child: Center(child: Text(getitemlist[index].fileName))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Center(
+                                child: Container(
+                                  child: Expanded(
+                                    child: Icon(
+                                      Icons.picture_as_pdf,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(getitemlist[index].fileName)
+                            ],
+                          )),
                     ),
                 Divider(
                   height: 20,

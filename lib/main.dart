@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_indicator/page_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Views/Page1.dart';
 import 'package:aman_app/Views/NotificationsManager.dart';
 
@@ -39,13 +40,14 @@ class _SplashState extends State<Splash>  with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    print('afdsfs');
+    print('dispose');
     super.dispose();
   }
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     setState(() {
       _lastLifecycleState = state;
+    doit();
     });
   }
   @override
@@ -59,6 +61,11 @@ class _SplashState extends State<Splash>  with WidgetsBindingObserver {
           startAnimation: 'Untitled',
           fit: BoxFit.fill,
         ));
+  }
+
+  void doit() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.clear();
   }
 
 

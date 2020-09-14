@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Home.dart';
 import 'Login.dart';
 
 class contactus extends StatefulWidget {
@@ -31,6 +32,16 @@ class _contactusState extends State<contactus> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
         title: Text('Contact Us'),
+        actions: <Widget>[
+
+          IconButton(icon: Icon(Icons.home), onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ExpansionTileSample()),
+            );
+          }),
+        ],
       ),
       key: _scaffoldKey,
       body

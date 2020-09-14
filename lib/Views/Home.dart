@@ -53,21 +53,21 @@ class forbody extends StatefulWidget {
   List<String> getlinklistforslider  = [];
 
   List<Icon> iconslist = [
-    Icon(Icons.cloud, size: 50, color: Colors.blueGrey.shade900),
-    Icon(Icons.local_hospital, size: 50, color: Colors.blueGrey.shade900),
-    Icon(Icons.home, size: 50, color: Colors.blueGrey.shade900),
-    Icon(Icons.domain, size: 50, color: Colors.blueGrey.shade900),
-    Icon(Icons.compare_arrows, size: 50, color: Colors.blueGrey.shade900),
-    Icon(Icons.vignette, size: 50, color: Colors.blueGrey.shade900),
-    Icon(Icons.filter_b_and_w, size: 50, color: Colors.blueGrey.shade900),
-    Icon(Icons.switch_camera, size: 50, color: Colors.blueGrey.shade900),
+    Icon(Icons.cloud, size: 50, color: Colors.white),
+    Icon(Icons.local_hospital, size: 50,color: Colors.white),
+    Icon(Icons.home, size: 50, color: Colors.white),
+    Icon(Icons.domain, size: 50, color: Colors.white),
+    Icon(Icons.compare_arrows, size: 50, color: Colors.white),
+    Icon(Icons.vignette, size: 50, color: Colors.white),
+    Icon(Icons.filter_b_and_w, size: 50,color: Colors.white),
+    Icon(Icons.switch_camera, size: 50, color: Colors.white),
   ];
 
   @override
   void initState() {
     super.initState();
     getdata();
-    getlinklist.add(getlink('Weather Forecast \n(February, 2019)',
+    getlinklist.add(getlink('Weather Forecast \n(February, 2021)',
         'https://www.accuweather.com/en/pk/karachi/261158/month/261158?monyr=2/01/2019'));
     getlinklist.add(getlink('Medical\nFacilities\nKarachi\n  ',
         'http://www.karachisnob.com/hospitals-clinics-karachi.htm'));
@@ -643,8 +643,10 @@ class forbody extends StatefulWidget {
                       },
                       child: Container(
 
+                        color:  Color(0xff074880),
                         width: 200,
                         child: Card(
+                            color:  Color(0xff074880),
                             shape: RoundedRectangleBorder(
                               side: new BorderSide(
                                   color: Colors.blueGrey.shade900, width: 1),
@@ -656,6 +658,7 @@ class forbody extends StatefulWidget {
                               children: [
                                 Container(
                                   width: 50,
+                                  color:  Color(0xff074880),
                                   child: iconslist[index],
                                 ),
                                 SizedBox(
@@ -670,7 +673,7 @@ class forbody extends StatefulWidget {
                                   width: 5,
                                 ),
                                 Center(
-                                  child: Text(getlinklist[index].key),
+                                  child: Text(getlinklist[index].key,style: TextStyle(color: Colors.white),),
                                 )
                               ],
                             )),

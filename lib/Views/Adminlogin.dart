@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import 'Home.dart';
+
 class WikipediaExplorer extends StatefulWidget {
   @override
   _WikipediaExplorerState createState() => _WikipediaExplorerState();
@@ -19,6 +21,16 @@ class _WikipediaExplorerState extends State<WikipediaExplorer> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
         title: const Text('Login'),
+        actions: <Widget>[
+
+          IconButton(icon: Icon(Icons.home), onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ExpansionTileSample()),
+            );
+          }),
+        ],
         // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
 
       ),

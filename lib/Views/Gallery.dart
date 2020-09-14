@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 
+import 'Home.dart';
+
 class Gallery extends StatefulWidget {
   @override
   mainstate createState() => mainstate();
@@ -31,6 +33,16 @@ class mainstate extends State<Gallery> {
       appBar: AppBar(
         title: Text('Gallery'),
         backgroundColor: Colors.blueGrey.shade900,
+        actions: <Widget>[
+
+          IconButton(icon: Icon(Icons.home), onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ExpansionTileSample()),
+            );
+          }),
+        ],
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -8,6 +8,8 @@ import 'package:flutter/widgets.dart';
 import 'package:aman_app/Views/ShowListItem.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Home.dart';
+
 class Exercise extends StatefulWidget {
   String get;
 
@@ -37,13 +39,25 @@ class sub extends State<Exercise> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
         title: Text(
-          getalldatalist[0].titile,
+          'Exercise Aman 2021',
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 18,
             letterSpacing: 2,
           ),
         ),
+        actions: <Widget>[
+
+          IconButton(icon: Icon(Icons.home), onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ExpansionTileSample()),
+            );
+          }),
+        ],
+
       ),
+
       backgroundColor: Colors.blueGrey.shade900,
       body: Stack(
         children: <Widget>[

@@ -21,7 +21,7 @@ class Griditem extends StatelessWidget {
           Flexible(
             child: CircleAvatar(
               radius: 30,
-              backgroundColor: Colors.blueGrey.shade900.withOpacity(0.9),
+              backgroundColor: Color(0xff074880).withOpacity(0.6),
               child: icon,
             ),
           ),

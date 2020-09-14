@@ -15,6 +15,7 @@ import 'package:aman_app/Views/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Alluserslist.dart';
+import 'Home.dart';
 import 'chat2.dart';
 
 class ChatUi extends StatefulWidget {
@@ -46,6 +47,16 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: Text('Chats'),
+        actions: <Widget>[
+
+          IconButton(icon: Icon(Icons.home), onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ExpansionTileSample()),
+            );
+          }),
+        ],
         backgroundColor: Colors.blueGrey.shade900,
       ),
       key: _scaffoldKey,
@@ -122,6 +133,7 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
                         children: <Widget>[
                           GestureDetector(
                             onTap: (){
+                              Navigator.pop(context);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => ChatTwoPage(chatdialoglist[index].dialogId)),

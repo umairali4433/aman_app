@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ChatUI.dart';
+import 'Home.dart';
 
 class ChatTwoPage extends StatefulWidget {
   var get  = '';
@@ -65,11 +66,21 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
         appBar: AppBar(
           title: Text("Chat"),
           backgroundColor: Colors.blueGrey.shade900,
+          actions: <Widget>[
+
+            IconButton(icon: Icon(Icons.home), onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ExpansionTileSample()),
+              );
+            }),
+          ],
         ),
         body: Stack(
           children: <Widget>[
             Image.asset(
-              "assets/images/backgroundchat.jpeg",
+              "assets/images/backgroundchat.jpg",
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
