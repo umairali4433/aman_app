@@ -157,7 +157,7 @@ class forbody extends StatefulWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-              'AMAN series of multinational exercises were started in 2007 with a view to promote regional cooperation and stability, greater interoperability and to display a united resolve against terrorism and crimes in maritime domain including Piracy. AMAN-19 is the sixth such exercise planned in 1st quarter 2019 at Karachi, Pakistan.'),
+              'AMAN series of multinational exercises were started in 2007 with a view to promote regional cooperation and stability, greater interoperability and to display a united resolve against terrorism and crimes in maritime domain including Piracy. AMAN-21 is the 8th such exercise planned in 1st quarter 2021 at Karachi, Pakistan.'),
         ),
         //header text
         Padding(
@@ -169,7 +169,7 @@ class forbody extends StatefulWidget {
               color: const Color(0xff7c94b6),
               image: const DecorationImage(
                 image:
-                    NetworkImage('https://aman.paknavy.gov.pk/images/cns.jpg'),
+                    AssetImage('assets/images/admiral.jpg'),
                 fit: BoxFit.cover,
               ),
               border: Border.all(

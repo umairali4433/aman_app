@@ -28,7 +28,7 @@ class _AllusersState extends State<Allusers>  with SingleTickerProviderStateMixi
     return Scaffold(
       backgroundColor: Colors.blueGrey.shade900,
       appBar: AppBar(
-        title: Text('All Userss'),
+        title: Text('All Users'),
         backgroundColor: Colors.blueGrey.shade900,
       ),
       body: hasData

@@ -1,12 +1,21 @@
-import 'dart:convert';
 
+
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:aman_app/Views/Participants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:native_pdf_view/native_pdf_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Pdfview.dart';
+import 'Webviewlogin.dart';
 
 class ShowListItem extends StatefulWidget {
   var ge  = '';
@@ -16,66 +25,100 @@ class ShowListItem extends StatefulWidget {
   _ShowListItemState createState() => _ShowListItemState(ge,val);
 }
 
-class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderStateMixin{
+class _ShowListItemState extends State<ShowListItem>  with TickerProviderStateMixin{
   var bollcheck = true;
   var get = '';
   var val = '';
+  String pathPDF = "";
   _ShowListItemState(this.get,this.val);
   List<chatsdialogmodel> getitemlist = [];
+
 
   @override
   void initState() {
 
-
-   // getLatestData();
+    createFileOfPdfUrl().then((f) {
+      setState(() {
+        pathPDF = f.path;
+        print(pathPDF);
+      });
+    });
+    getLatestData();
   }
 
-//  Future<void> getLatestData() async {
-//    Map<String, String> requestHeaders = {
-//      'Content-type': 'application/json',
-//      'Accept': 'application/json',
-//      'Authorization': 'Basic d2FoaWRAd2FoaWQuY29tIDEyMw==',
-//    };
-//
-//    Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/files/1");
-//
-//    var response = await http.get(uri, headers: requestHeaders);
-//
-//    if (response.statusCode == 401) {
-//      print('error');
-//    } else if (response.statusCode == 200) {
-//      var responseJson = json.decode(response.body);
-//      for (var u in responseJson) {
-//        chatsdialogmodel post = chatsdialogmodel.a1(
-//            u['fileName'].toString(),
-//            u['contentType'].toString(),
-//            u['data'].toString(),
-//            u['path'].toString());
-//        getitemlist.add(post);
-//      }
-//      setState(() {
-//        bollcheck  = false;
-//      });
-//
-//      print(getitemlist[0].fileName);
-//      print(getitemlist[1].contentType);
-//      print(getitemlist[2].data);
-//    }
-//  }
+
+
+
+
+
+  Future<void> getLatestData() async {
+    final ore = await SharedPreferences.getInstance();
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Basic '+ore.get('counter'),
+    };
+
+    Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/files/"+val);
+
+    var response = await http.get(uri, headers: requestHeaders);
+
+    if (response.statusCode == 401) {
+      print('error');
+    } else if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      for (var u in responseJson) {
+        chatsdialogmodel post = chatsdialogmodel.a1(
+            u['fileName'].toString(),
+            u['contentType'].toString(),
+            u['data'].toString(),
+            u['path'].toString());
+        getitemlist.add(post);
+      }
+      setState(() {
+        getitemlist;
+        bollcheck  = false;
+      });
+
+
+      print('asdad');
+    }
+  }
+  Future<File> createFileOfPdfUrl() async {
+    final url = "http://www.africau.edu/images/default/sample.pdf";
+    final filename = url.substring(url.lastIndexOf("/") + 1);
+    var request = await HttpClient().getUrl(Uri.parse(url));
+    var response = await request.close();
+    var bytes = await consolidateHttpClientResponseBytes(response);
+    String dir = (await getApplicationDocumentsDirectory()).path;
+    File file = new File('$dir/$filename');
+    await file.writeAsBytes(bytes);
+    return file;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return bollcheck?Center(
+      child: SpinKitSquareCircle(
+        color: Colors.white,
+        size: 50.0,
+        controller: AnimationController(
+            vsync: this, duration: const Duration(milliseconds: 1200)),
+      ),
+    ):
+    Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
         title: Text(get),
       ),
-      body: ListView.builder(
-          itemCount: 8,
+      body: getitemlist.length==0?Center(child: Text('No data found'),):ListView.builder(
+          itemCount: getitemlist.length,
           itemBuilder: (context, index) {
             return  Column(
               children: [
-                (index%2==0)?Padding(
+                
+
+                (getitemlist[index].contentType.contains('image'))?Padding(
                     padding: EdgeInsets.all(4),
                     child: Card(
                     elevation: 3,
@@ -86,13 +129,25 @@ class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderS
                         ),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(25.0),
-                            child: Image.asset('assets/images/dummy.jpg')))):
+                            child: Image.network(getitemlist[index].path)))):
+
+                (getitemlist[index].contentType.contains('text'))?GestureDetector(
+                  onTap: (){
+                    _launchInWebViewOrVC(getitemlist[index].path);
+
+                  },
+                  child: Container(
+                      width: 200,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Center(child: Text(getitemlist[index].fileName))),
+                ):
                     GestureDetector(
                       onTap: (){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MyAppusermanual()),
-                        );
+                       Navigator.of(context).push(MaterialPageRoute(builder: ( context) { return flutterpdf(getitemlist[index].path); }));
                       },
                       child: Container(
                         width: 200,
@@ -101,19 +156,42 @@ class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderS
                             color: Colors.grey.shade200,
                             borderRadius: BorderRadius.circular(30.0),
                           ),
-                          child: Center(child: Text('Pdfview'))),
+                          child: Center(child: Text(getitemlist[index].fileName))),
                     ),
                 Divider(
                   height: 20,
                 ),
-
-
-
-
               ],
             );
           }),
     );
+  }
+  Future<void> _launchInWebViewOrVC(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: true,
+        forceWebView: true,
+        headers: <String, String>{'my_header_key': 'my_header_value'},
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Widget krleywr() {
+
+    return PDFViewerScaffold(
+        appBar: AppBar(
+          title: Text(pathPDF),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.share),
+              onPressed: () {},
+            ),
+          ],
+        ),
+        path: pathPDF);
   }
 }
 

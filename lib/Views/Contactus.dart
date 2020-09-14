@@ -6,6 +6,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Login.dart';
+
 class contactus extends StatefulWidget {
   @override
   _contactusState createState() => _contactusState();
@@ -34,16 +36,68 @@ class _contactusState extends State<contactus> {
       body
           : Column(
               children: <Widget>[
-               Container(
-                 width: MediaQuery.of(context).size.width,
-                 height:MediaQuery.of(context).size.height*.3,
-                 color: Colors.blue[900],
-                 child: Stack(
-                   children: [
-                     Center(child: Text('Contact Us',style: TextStyle(color: Colors.white,fontSize: 30),))
-                   ],
-                 ),
-               ),
+                Stack(
+                  children: <Widget>[
+                    ClipPath(
+                      clipper: WaveClipper2(),
+                      child: Container(
+                        child: Column(),
+                        width: double.infinity,
+                        height: 300,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Color(0xff074880).withOpacity(0.9),
+                              Color(0xff074880).withOpacity(0.8)
+                            ])),
+                      ),
+                    ),
+                    ClipPath(
+                      clipper: WaveClipper3(),
+                      child: Container(
+                        child: Column(),
+                        width: double.infinity,
+                        height: 300,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [
+                              Colors.indigo.shade900,
+                              Color(0xff074880).withOpacity(0.5)
+                            ])),
+                      ),
+                    ),
+                    ClipPath(
+                      clipper: WaveClipper1(),
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 40,
+                            ),
+//                      Icon(
+//                        Icons.fastfood,
+//                        color: Colors.white,
+//                        size: 60,
+//                      ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Contact Us",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 30),
+                            ),
+                          ],
+                        ),
+                        width: double.infinity,
+                        height: 300,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: [Color(0xff074880), Color(0xff074880)])),
+                      ),
+                    ),
+                  ],
+                ),
                 Card(
                   elevation: 3,
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
@@ -52,7 +106,7 @@ class _contactusState extends State<contactus> {
                     child: Row(
                       children: <Widget>[
                         Text(
-                          'name',
+                          'Name',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -73,7 +127,7 @@ class _contactusState extends State<contactus> {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: <Widget>[
-                        Text('designation',
+                        Text('Designation',
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.black,
@@ -87,13 +141,14 @@ class _contactusState extends State<contactus> {
                   ),
                 ),
                 Card(
+
                   elevation: 3,
                   margin: EdgeInsets.only(left: 16, right: 16, top: 8),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: <Widget>[
-                        Text('telephone',
+                        Text('Telephone',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
@@ -121,7 +176,7 @@ class _contactusState extends State<contactus> {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: <Widget>[
-                        Text('email',
+                        Text('Email',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,

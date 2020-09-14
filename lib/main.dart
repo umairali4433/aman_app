@@ -2,10 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:animated_splash/animated_splash.dart';
+import 'package:aman_app/Views/Login.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_splash_screen/flare_splash_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
@@ -19,12 +22,32 @@ void main() {
   runApp(Splash());
 }
 
-class Splash extends StatefulWidget {
+class Splash extends StatefulWidget{
+
   @override
   _SplashState createState() => _SplashState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashState extends State<Splash>  with WidgetsBindingObserver {
+  AppLifecycleState _lastLifecycleState;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    print('afdsfs');
+    super.dispose();
+  }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    setState(() {
+      _lastLifecycleState = state;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,11 +60,14 @@ class _SplashState extends State<Splash> {
           fit: BoxFit.fill,
         ));
   }
+
+
 }
 class MyApp extends StatefulWidget {
   Mainpage createState() => Mainpage();
 }
 class Mainpage extends State<MyApp> {
+
   NotificationsManager notificationsManager = NotificationsManager();
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   PageController _pageController = PageController();
@@ -51,7 +77,6 @@ class Mainpage extends State<MyApp> {
     return Scaffold(
       body: Stack(
         children: [
-
           Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
@@ -59,7 +84,6 @@ class Mainpage extends State<MyApp> {
                         Colors.blueGrey.shade900.withOpacity(0.5), BlendMode.color),
                     image: AssetImage('assets/images/backgroundnewone.jpg'),
                     fit: BoxFit.cover)),
-
           ),
       Container(
         decoration: BoxDecoration(
@@ -112,12 +136,15 @@ class Mainpage extends State<MyApp> {
       ),
     );
   }
+
   void _showNotification(Map<String, dynamic> message) {
 
     notificationsManager.showNotifications(message);
   }
+
   @override
   void initState() {
+    super.initState();
     notificationsManager.initializeNotifications(context);
 
     _firebaseMessaging.requestNotificationPermissions(
@@ -158,7 +185,7 @@ class Mainpage extends State<MyApp> {
         currentPage = _pageController.page;
       });
     });
-    super.initState();
+
   }
 }
 //

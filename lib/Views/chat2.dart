@@ -149,12 +149,10 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       ),
     );
   }
-
   _save() async {
     if (_controller.text.isEmpty) return;
     FocusScope.of(context).requestFocus(FocusNode());
     sendmessage(_controller.text.toString());
-
   }
   Row _buildMessageRow(String message, {bool current}) {
     return Row(
@@ -256,7 +254,6 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       "createdAt":null,
       "updatedAt":null,
     };
-
     Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/messages/");
 
 
@@ -266,10 +263,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       print('error');
     }
     else if(response.statusCode == 201){
-      setState(() {
-        reversedList.insert(0, chatsdialogmodel.a1(message,getid,get));
-        _controller.text = '';
-      });
+
 
     }
   }
