@@ -34,11 +34,16 @@ class _contactusState extends State<contactus> {
       body
           : Column(
               children: <Widget>[
-                Image.asset(
-                  'assets/images/contact_us.jpg',
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                ),
+               Container(
+                 width: MediaQuery.of(context).size.width,
+                 height:MediaQuery.of(context).size.height*.3,
+                 color: Colors.blue[900],
+                 child: Stack(
+                   children: [
+                     Center(child: Text('Contact Us',style: TextStyle(color: Colors.white,fontSize: 30),))
+                   ],
+                 ),
+               ),
                 Card(
                   elevation: 3,
                   margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),

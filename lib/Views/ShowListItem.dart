@@ -10,20 +10,23 @@ import 'Pdfview.dart';
 
 class ShowListItem extends StatefulWidget {
   var ge  = '';
-  ShowListItem(this.ge);
+  var val = '';
+  ShowListItem(this.ge,this.val);
   @override
-  _ShowListItemState createState() => _ShowListItemState(ge);
+  _ShowListItemState createState() => _ShowListItemState(ge,val);
 }
 
 class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderStateMixin{
   var bollcheck = true;
   var get = '';
-  _ShowListItemState(this.get);
+  var val = '';
+  _ShowListItemState(this.get,this.val);
   List<chatsdialogmodel> getitemlist = [];
 
   @override
   void initState() {
-    print(get);
+
+
    // getLatestData();
   }
 
@@ -64,6 +67,7 @@ class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderS
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey.shade900,
         title: Text(get),
       ),
       body: ListView.builder(
@@ -72,8 +76,17 @@ class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderS
             return  Column(
               children: [
                 (index%2==0)?Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Image.asset('assets/images/123.png')):
+                    padding: EdgeInsets.all(4),
+                    child: Card(
+                    elevation: 3,
+                        shadowColor: Colors.grey,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.white70, width: 1),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(25.0),
+                            child: Image.asset('assets/images/dummy.jpg')))):
                     GestureDetector(
                       onTap: (){
                         Navigator.push(
@@ -91,7 +104,7 @@ class _ShowListItemState extends State<ShowListItem>  with SingleTickerProviderS
                           child: Center(child: Text('Pdfview'))),
                     ),
                 Divider(
-                  height: 100,
+                  height: 20,
                 ),
 
 

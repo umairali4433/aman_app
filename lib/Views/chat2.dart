@@ -54,7 +54,13 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: callmethod(),
+      onWillPop: () async{
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ChatUi()),
+        );
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text("Chat"),

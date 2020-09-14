@@ -1,81 +1,25 @@
-import 'dart:core';
-
+import 'package:aman_app/Views/speakers.dart';
 import 'package:aman_app/model/getlink.dart';
 import 'package:aman_app/model/getlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:aman_app/Views/ShowListItem.dart';
 
-class Exercise extends StatefulWidget {
-  String get;
+import 'Leaders.dart';
 
-  Exercise(this.get);
-
-  sub createState() => sub(get);
+class organizers extends StatefulWidget {
+  @override
+  _State createState() => _State();
 }
 
-class sub extends State<Exercise> {
-  String getval;
-
-  sub(this.getval);
-
+class _State extends State<organizers> {
   List<getlist> getalldatalist = [];
-
   @override
   void initState() {
-    if (getval == "0") {
-      List<getlink> get1 = [];
-      get1.add(getlink("Harbour Phase","1"));
-      get1.add( getlink('Sea Phase', '2'));
-
-      List<getlink> get2 = [];
-      get2.add(getlink('Opening Ceremony',"3"));
-      get2.add(getlink('Reception Dinner',"4"));
-      get2.add(getlink('IMC',"5"));
-      get2.add(getlink('Band Display & CT Demo',"6"));
-      get2.add(getlink('Food Gala & cultural show',"7"));
-      get2.add(getlink('IFR(internal fleet review)',"8"));
-
-      List<getlink> get3 = [];
-      get3.add(getlink('Events Date & time', '9'));
-      getalldatalist
-          .add(getlist('Exercise','assets/images/activities.jpeg', 'Activities', get1));
-      getalldatalist.add(getlist('','assets/images/events.jpg', 'Events', get2));
-      getalldatalist.add(getlist('','assets/images/schedule.jpg', 'Schedule', get3));
-    }
-    else if (getval == "1") {
-      List<getlink> get1 = [];
-      get1.add(getlink('Harbour Facilities','10'));
-          get1.add(getlink('Logistics','11'));
-          get1.add(getlink('Admin Assistance','12'));
-          get1.add(getlink('Berth','13'));
-          get1.add(getlink('Tugs','14'));
-          get1.add(getlink('Pilots','15'));
-      getalldatalist.add(getlist('Service & Support','assets/images/service.jpg', 'Service & Support', get1));
-
-    }
-    else if (getval == "3") {
-      List<getlink> get1 = [];
-      get1.add(getlink('Speakers','123'));
-      get1.add(getlink('Leaders','1231'));
-    //  getalldatalist.add(getlist('Organizers','assets/images/organizer.jpg', 'Organizers', get1));
-    } else if (getval == '5') {
-      List<String> get1 = ['Contact us', 'FeedBack','Query','ChatBox'];
-      //getalldatalist.add(getlist('Contact Us','assets/images/contact.jpg', 'Contact Us', get1));
-    } else if (getval == '6') {
-      List<getlink> get1 = [];
-      get1.add(getlink('Official Calender','17'));
-      get1.add(getlink('Floor Plan','18'));
-      get1.add(getlink('Media Partners','19'));
-
-      getalldatalist.add(getlist('Misc','assets/images/misc.jpg', 'Misc', get1));
-    }
+    List<getlink> get1 = [];
+    get1.add(getlink('Speakers','123'));
+    get1.add(getlink('Leaders','1231'));
+    getalldatalist.add(getlist('Organizers','assets/images/organizer.jpg', 'Organizers', get1));
   }
-
-  final Color primary = Color(0xff7b7517);
-  final Color background = Color(0xff2f2f4f);
-  final Color overlay = Color(0xff212129);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +70,7 @@ class sub extends State<Exercise> {
                                             .withOpacity(0.5),
                                         border: Border.all(color: Colors.white),
                                         borderRadius:
-                                            BorderRadius.circular(20)),
+                                        BorderRadius.circular(20)),
                                     child: Text(
                                       getalldatalist[int].key,
                                       textAlign: TextAlign.center,
@@ -170,7 +114,7 @@ class sub extends State<Exercise> {
                                   ),
                                 ),
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShowListItem(getalldatalist[int].getlinklist[int2].key,getalldatalist[int].getlinklist[int2].value)));
+                                 check(int2);
                                 },
                               ),
                               SizedBox(
@@ -197,5 +141,14 @@ class sub extends State<Exercise> {
         },
       ),
     );
+  }
+
+  void check(int index) {
+    if(index == 1){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Leaders()));
+    }
+    else{
+      Navigator.push(context, MaterialPageRoute(builder: (context) => speakers()));
+    }
   }
 }

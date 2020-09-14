@@ -73,8 +73,7 @@ class forbody extends StatefulWidget {
         'http://www.karachisnob.com/hospitals-clinics-karachi.htm'));
     getlinklist.add(getlink('Hospitality Centre\nKarachi',
         'https://www.travel-culture.com/karachi-hotels'));
-    getlinklist.add(getlink('Medical\nFacilities\nKarachi\n  ',
-        'http://www.karachisnob.com/hospitals-clinics-karachi.htm'));
+
 
     getlinklist.add(getlink('Emergency\nNumbers\nKarachi\n  ',
         'https://www.brandsynario.com/karachi-emergency-numbers-you-must-have-on-your-phone'));
@@ -87,8 +86,8 @@ class forbody extends StatefulWidget {
     getlinklist.add(getlink('Karachi\nPort\nImportant features\n  ',
         'https://en.wikipedia.org/wiki/Port_of_Karachi'));
     getlinklist.add(getlink('More\nAbout\nKarachi\n  ',
-        'https://en.wikipedia.org/wiki/Port_of_Karachi'));
-    _tabController = new TabController(length: 7, vsync: this);
+        'https://www.karachi.com/'));
+    _tabController = new TabController(length: 8, vsync: this);
     animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000),
@@ -206,6 +205,9 @@ class forbody extends StatefulWidget {
             controller: _tabController,
             tabs: [
               new Tab(
+                text: 'AMAN-21',
+              ),
+              new Tab(
                 text: 'AMAN-19',
               ),
               new Tab(
@@ -230,10 +232,38 @@ class forbody extends StatefulWidget {
           ),
         ),
         new Container(
-          height: 220.0,
+          height: 250.0,
           child: new TabBarView(
             controller: _tabController,
             children: <Widget>[
+              Container(
+                color: Colors.blueGrey.shade900,
+                child: new Card(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text(
+                                'Exercise AMAN-21',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Expanded(
+                            child: Flexible(
+                              child: Text(
+                                  'Exercise AMAN-21 has been scheduled in North Arabian Sea in 1st quarter of 2021. Navies of different Countries have been invited to participate. This is the 8th exercise of AMAN series. AMAN is an Urdu word meaning “PEACE” and slogan of AMAN exercise is “Together for Peace”.'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
               Container(
                 color: Colors.blueGrey.shade900,
                 child: new Card(
@@ -254,8 +284,8 @@ class forbody extends StatefulWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Flexible(
                         child: Text(
-                            'Exercise AMAN-19 has been scheduled in North Arabian Sea in 1st quarter of 2019. Navies of 85 Countries have been invited to participate. This is the 7th exercise of AMAN series. AMAN is an Urdu word meaning “PEACE” and slogan of AMAN exercise is “Together for Peace”.'),
-                      ),
+                          "Exercise AMAN-19 was conducted from 08 to 12 FEB 2019. 11 foreign country ships (Indonesia, Nigeria, Srilanka, China, Turkey, Malaysia, Poland, Italy, UK, USA), 15 EOD/SOF/Marines teams, 19 senior officers, 64 observers and 32 ambassadors/high commissioners/DAs/NAs/MAs (Total 115 observers/diplomates) other than PN & PMSA ships, aircrafts, SSG(N) teams and Pak Marines assets participated in the exercise.",
+                      )),
                     ),
                   ],
                 )),
@@ -679,11 +709,9 @@ class forbody extends StatefulWidget {
     if (response.statusCode == 401){
       print('error');
     }
-
     else if(response.statusCode == 200){
       var responseJson = json.decode(response.body);
       for (var u in responseJson) {
-
         getlinklistforslider.add((u['path'].toString()));
       }
       setState(() {

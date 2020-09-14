@@ -21,32 +21,31 @@ class chatsubstate extends State<Participants>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey.shade900,
-        title: Text('Participants'),
-      ),
-      body: ListView.builder(
-        padding: EdgeInsets.only(top: 20),
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-          ListTile(
-        
-          leading: Image.network(getlinklist[index].key),
-          trailing: Text(getlinklist[index].value),
+        appBar: AppBar(
+          backgroundColor: Colors.blueGrey.shade900,
+          title: Text('Participants'),
+        ),
+        body: ListView.builder(
+          padding: EdgeInsets.only(top: 20),
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                ListTile(
+
+                  title: Text(getlinklist[index].value),
 
 
-          )  ,
-              Divider(
-               height: 50,
-              )
-            ],
-          );
+                )  ,
+                Divider(
+                  height: 50,
+                )
+              ],
+            );
 
-        },
-        itemCount: getlinklist.length,
-      ));
-    
+          },
+          itemCount: getlinklist.length,
+        ));
+
   }
 
 }

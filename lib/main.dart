@@ -70,8 +70,6 @@ class Mainpage extends State<MyApp> {
                 fit: BoxFit.fitWidth)),
 
       ),
-
-
           Container(
 
             constraints: BoxConstraints.expand(),
@@ -81,11 +79,7 @@ class Mainpage extends State<MyApp> {
                   Container(
                     color: Colors.black54,
                     child: ListTile(
-                      leading: CachedNetworkImage(
-                        imageUrl: "https://aman.paknavy.gov.pk/images/logo.png",
-                        placeholder: (context, url) => CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
+                      leading: Image.asset('assets/images/realone.png'),
                       title: Text(
                         'EXERCISE AMAN 2021',
                         style: TextStyle(color: Colors.white, letterSpacing: .5,fontWeight: FontWeight.bold,fontSize: 20),

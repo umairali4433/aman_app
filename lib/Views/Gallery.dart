@@ -77,7 +77,7 @@ class mainstate extends State<Gallery> {
   }
 
   void getdata() async {
-    var response = await http.get('http://sarosh-001-site1.itempurl.com/filepaths/slider');
+    var response = await http.get('http://sarosh-001-site1.itempurl.com/filepaths/gallery');
 
     if (response.statusCode == 401){
       print('error');
