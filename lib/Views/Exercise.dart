@@ -213,7 +213,7 @@ class sub extends State<Exercise> {
           get2.add(getlink('IMC',"5"));
           get2.add(getlink('Band Display & CT Demo',"6"));
           get2.add(getlink('Food Gala & cultural show',"7"));
-          get2.add(getlink('IFR(internal fleet review)',"8"));
+          get2.add(getlink('IFR(International Fleet review)',"8"));
 
           List<getlink> get3 = [];
           get3.add(getlink('Events Date & time', '9'));
@@ -243,8 +243,7 @@ class sub extends State<Exercise> {
           //getalldatalist.add(getlist('Contact Us','assets/images/contact.jpg', 'Contact Us', get1));
         } else if (getval == '6') {
           List<getlink> get1 = [];
-          get1.add(getlink('Official Calender','17'));
-          get1.add(getlink('Floor Plan','18'));
+          get1.add(getlink('Official Chandler','17'));
           get1.add(getlink('Media Partners','19'));
 
           getalldatalist.add(getlist('Misc','assets/images/misc.jpg', 'Misc', get1));
