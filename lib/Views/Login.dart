@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:aman_app/Cons/Constants.dart';
 import 'package:aman_app/main.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +17,6 @@ class LoginSevenPage extends StatefulWidget {
 }
 class _LoginSevenPageState extends State<LoginSevenPage>
     with TickerProviderStateMixin {
-
   @override
   final RoundedLoadingButtonController _btnController =
       new RoundedLoadingButtonController();
@@ -199,7 +199,7 @@ class _LoginSevenPageState extends State<LoginSevenPage>
     };
 
     final response = await http.get(
-      'http://sarosh-001-site1.itempurl.com/api/users/auth',
+      Base_url+'users/auth',
       headers: requestHeaders,
     );
 
@@ -247,7 +247,7 @@ class _LoginSevenPageState extends State<LoginSevenPage>
         "token": token,
       };
 
-      Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/users/RegisterToken");
+      Uri uri = Uri.parse(Base_url+"users/RegisterToken");
 
       final newURI = uri.replace(queryParameters: params);
 

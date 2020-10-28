@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aman_app/Cons/Constants.dart';
 import 'package:aman_app/model/chatsdialogmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,7 @@ class _AllusersState extends State<Allusers>  with SingleTickerProviderStateMixi
     };
 
     final response = await http.get(
-      'http://sarosh-001-site1.itempurl.com/api/users',
+      Base_url+'users',
       headers: requestHeaders,
     );
 

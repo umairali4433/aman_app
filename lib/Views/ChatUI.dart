@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aman_app/Cons/Constants.dart';
 import 'package:aman_app/Views/Login.dart';
 import 'package:aman_app/main.dart';
 /**
@@ -185,7 +186,7 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
         'Authorization': 'Basic ' + ore.getString('counter'),
       };
       final response = await http.get(
-        'http://sarosh-001-site1.itempurl.com/api/dialogs/' + ore.getString('id'),
+        Base_url+'dialogs/' + ore.getString('id'),
         headers: requestHeaders,
       );
 
@@ -202,8 +203,6 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
           if((ore.getString('useremail')==u['user2Email'].toString())){
             getemail =u['user1Email'].toString();
           }
-
-
 
           if((ore.getString('id')!=u['user1Id'].toString())){
           getid =u['user1Id'].toString();

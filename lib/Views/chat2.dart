@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aman_app/Cons/Constants.dart';
 import 'package:aman_app/model/chatsdialogmodel.dart';
 /**
  * Author: Damodar Lohani
@@ -214,7 +215,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       "userid2": get
     };
 
-    Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/messages/imessage");
+    Uri uri = Uri.parse(Base_url+"messages/imessage");
 
     final newURI = uri.replace(queryParameters: params);
 
@@ -265,7 +266,7 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       "createdAt":null,
       "updatedAt":null,
     };
-    Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/messages/");
+    Uri uri = Uri.parse(Base_url+"/messages/");
 
 
     var response = await http.post(uri, headers:requestHeaders, body: json.encode(params));

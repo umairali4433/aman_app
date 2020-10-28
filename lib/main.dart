@@ -70,6 +70,7 @@ class _SplashState extends State<Splash>  with WidgetsBindingObserver {
 
 
 }
+
 class MyApp extends StatefulWidget {
   Mainpage createState() => Mainpage();
 }

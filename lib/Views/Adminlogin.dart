@@ -14,7 +14,7 @@ class WikipediaExplorer extends StatefulWidget {
 class _WikipediaExplorerState extends State<WikipediaExplorer> {
   Completer<WebViewController> _controller = Completer<WebViewController>();
   final Set<String> _favorites = Set<String>();
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

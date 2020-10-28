@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aman_app/Cons/Constants.dart';
 /**
  * Author: Sudip Thapa
  * profile: https://github.com/sudeepthapa
@@ -707,7 +708,7 @@ class forbody extends StatefulWidget {
   }
 
   void getdata() async {
-    var response = await http.get('http://sarosh-001-site1.itempurl.com/filepaths/slider');
+    var response = await http.get(Sliderurl+'filepaths/slider');
 
     if (response.statusCode == 401){
       print('error');

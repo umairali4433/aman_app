@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:aman_app/Cons/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
@@ -89,7 +90,7 @@ class mainstate extends State<Gallery> {
   }
 
   void getdata() async {
-    var response = await http.get('http://sarosh-001-site1.itempurl.com/filepaths/gallery');
+    var response = await http.get(Sliderurl+'filepaths/gallery');
 
     if (response.statusCode == 401){
       print('error');

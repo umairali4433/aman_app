@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:aman_app/Cons/Constants.dart';
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:aman_app/Views/Participants.dart';
@@ -59,7 +60,7 @@ class _ShowListItemState extends State<ShowListItem>  with TickerProviderStateMi
       'Authorization': 'Basic '+ore.get('counter'),
     };
 
-    Uri uri = Uri.parse("http://sarosh-001-site1.itempurl.com/api/files/"+val);
+    Uri uri = Uri.parse(Base_url+"files/"+val);
 
     var response = await http.get(uri, headers: requestHeaders);
 
