@@ -151,6 +151,14 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
                                 backgroundImage: NetworkImage(
                                     'https://aman.paknavy.gov.pk/images/logo.png'),
                               ),
+                              trailing:  Wrap(
+                                direction: Axis.vertical,
+                                spacing: 12, // space between two icons
+                                children: <Widget>[
+                                  Text(chatdialoglist[index].country,style: TextStyle(color: Colors.white),), // icon-1
+                                  Text(chatdialoglist[index].des,style: TextStyle(color: Colors.white),), // icon-2
+                                ],
+                              ),
                             ),
                           ),
                           Divider(
@@ -195,13 +203,18 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
       } else if (response.statusCode == 200) {
         var responseJson = json.decode(response.body);
         for (var u in responseJson) {
-          var getid = '',getemail = '';
+          var getid = '',getemail = '',getcountry = '',getdes;
 
           if((ore.getString('useremail')==u['user1Email'].toString())){
             getemail =u['user2Email'].toString();
+            getcountry =u['user2Country'].toString();
+            getdes =u['user2Designation'].toString();
+
           }
           if((ore.getString('useremail')==u['user2Email'].toString())){
             getemail =u['user1Email'].toString();
+            getcountry =u['user1Country'].toString();
+            getdes =u['user1Designation'].toString();
           }
 
           if((ore.getString('id')!=u['user1Id'].toString())){
@@ -210,11 +223,15 @@ class chatsubstate extends State<ChatUi> with SingleTickerProviderStateMixin {
           else if(ore.getString('id')!=u['user2Id'].toString()){
             getid =u['user2Id'].toString();
           }
-          chatsdialogmodel post = chatsdialogmodel(
+          chatsdialogmodel post = chatsdialogmodel.a2(
               getid,
               getemail,
               u['user2Email'].toString(),
-              u['lastMessage'].toString());
+              u['lastMessage'].toString(),
+              getcountry,
+            getdes
+
+          );
           chatdialoglist.add(post);
         }
         filteredUsers = chatdialoglist;

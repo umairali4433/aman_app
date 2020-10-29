@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:aman_app/Views/ShowListItem.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'ChatUI.dart';
 import 'Home.dart';
 
 class Exercise extends StatefulWidget {
@@ -36,7 +37,19 @@ class sub extends State<Exercise> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.chat),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ChatUi()),
+            );
+
+          },
+        ),
+
+        appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
         title: Text(
           'Exercise Aman 2021',

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'ChatUI.dart';
 import 'Home.dart';
 import 'Leaders.dart';
 import 'Login.dart';
@@ -23,6 +24,17 @@ class _State extends State<organizers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.chat),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChatUi()),
+          );
+
+        },
+      ),
+
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
         title: Text(

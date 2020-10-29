@@ -7,6 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'ChatUI.dart';
 import 'Home.dart';
 import 'Login.dart';
 
@@ -30,6 +31,17 @@ class _contactusState extends State<contactus> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.chat),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChatUi()),
+          );
+
+        },
+      ),
+
       appBar: AppBar(
         backgroundColor: Colors.blueGrey.shade900,
         title: Text('Contact Us'),
