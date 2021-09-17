@@ -214,7 +214,6 @@ class _ChatTwoPageState extends State<ChatTwoPage> {
       "userid1": getid,
       "userid2": get
     };
-
     Uri uri = Uri.parse(Base_url+"messages/imessage");
 
     final newURI = uri.replace(queryParameters: params);

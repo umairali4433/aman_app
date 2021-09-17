@@ -285,6 +285,262 @@ floatingActionButton: FloatingActionButton(
                   color: Colors.blueGrey.shade900,
                   child: new Card(
                       child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Exercise AMAN-19',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Flexible(
+                                child: Text(
+                                  "Exercise AMAN-19 was conducted from 08 to 12 FEB 2019. 11 foreign country ships (Indonesia, Nigeria, Srilanka, China, Turkey, Malaysia, Poland, Italy, UK, USA), 15 EOD/SOF/Marines teams, 19 senior officers, 64 observers and 32 ambassadors/high commissioners/DAs/NAs/MAs (Total 115 observers/diplomates) other than PN & PMSA ships, aircrafts, SSG(N) teams and Pak Marines assets participated in the exercise.",
+                                )),
+                          ),
+                        ],
+                      )),
+                ),
+                Container(
+                  color: Colors.blueGrey.shade900,
+                  child: new Card(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Exercise AMAN-17',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Flexible(
+                              child: Text(
+                                  'Exercise AMAN-17 was conducted from 10-14 Feb 2017 and 34 countries participated with naval assets and observers. Total 12 ships from Australia, China, Indonesia, Russia, Sri Lanka, Turkey, UK and USA took part in exercise. 07 x aircraft from Australia, China, Japan, Russia, Turkey & UK and 09 SOF/ EOD/ Marines teams from China, Indonesia, Malaysia, Maldives, Russia, Sri Lanka, Turkey and UK also participated during the exercise. 67 x observers of 34 countries participated in AMAN-17.'),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+                Container(
+                  color: Colors.blueGrey.shade900,
+                  child: new Card(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Exercise AMAN-15',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Flexible(
+                              child: Text(
+                                  'Exercise AMAN-15 was conducted in Feb 15. 13 ships, 02 aircraft, 14 SOF/EOD/Marines teams and more than 60 observers from 34 countries had confirmed their participation in the exercise. Only International Maritime Conference was conducted.'),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+                Container(
+                  color: Colors.blueGrey.shade900,
+                  child: new Card(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Exercise AMAN-13',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Flexible(
+                              child: Text(
+                                  'Exercise AMAN-13 was conducted from 4-8 March 2013. Navies of 29 countries participated with naval assets and observers. Total 12 ships from 10 different countries, 9 SOF/EOd teams from 6 different countries and 36 observers from 21 countries took part in exercise.'),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+                Container(
+                  color: Colors.blueGrey.shade900,
+                  child: new Card(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Exercise AMAN-11',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 10.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Flexible(
+                                child: Text(
+                                    'Exercise AMAN-11 was conducted from 8-12 March 2011 and 28 countries participated with naval assets and observers. Total 11 ships from Australia, China, France, Indonesia, Italy, Malaysia, Saudi Arabia and USA took part in exercise. Three aircraft from Australia & Japan and 03 SOF/EOD/Marines teams from China, Turkey and USA also participated during the exercise. Forty three observers of 26 countries participated in AMAN-11.'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+                Container(
+                  color: Colors.blueGrey.shade900,
+                  child: new Card(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Exercise AMAN-09',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Flexible(
+                              child: Text(
+                                  'Exercise AMAN-09 was held in March 2009. During this Exercise 23 ships, 13 Aircrafts and 9 SOF teams of Australia, Bangladesh, China, France, Japan, Malaysia, UK and Nigeria, Turkey and USA participated. Observers from 27 countries also attended the exercise'),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+                Container(
+                  color: Colors.blueGrey.shade900,
+                  child: new Card(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Exercise AMAN-07',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Flexible(
+                              child: Text(
+                                  'Exercise AMAN-07 was held in March 2007 which was a big success. During AMAN-07, 14 Ships of Bangladesh, China, France, Italy, Malaysia, UK and USA Navies participated. Besides, SOF/EOD teams from Bangladesh and Turkey also participated in SOF Exercises and 21 countries attended the Exercise as observer.'),
+                            ),
+                          ),
+                        ],
+                      )),
+                )
+              ],
+            ),
+          ),
+          new Container(
+            decoration: new BoxDecoration(color: Colors.blueGrey.shade900),
+            child: new TabBar(
+              isScrollable: true,
+              labelStyle: TextStyle(fontSize: 13.0 ),
+              indicatorColor: Colors.white,
+              controller: _tabController,
+              tabs: [
+                new Tab(
+                  text: 'AMAN-21',
+                ),
+                new Tab(
+                  text: 'AMAN-19',
+                ),
+                new Tab(
+                  text: 'AMAN-17',
+                ),
+                new Tab(
+                  text: 'AMAN-15',
+                ),
+                new Tab(
+                  text: 'AMAN-13',
+                ),
+                new Tab(
+                  text: 'AMAN-11',
+                ),
+                new Tab(
+                  text: 'AMAN-09',
+                ),
+                new Tab(
+                  text: 'AMAN-07',
+                ),
+              ],
+            ),
+          ),
+          new Container(
+            height: 250.0,
+            child: new TabBarView(
+              controller: _tabController,
+              children: <Widget>[
+                Container(
+                  color: Colors.blueGrey.shade900,
+                  child: new Card(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: <Widget>[
+                                Text(
+                                  'Exercise AMAN-21',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Expanded(
+                              child: Flexible(
+                                child: Text(
+                                    'Exercise AMAN-21 has been scheduled in North Arabian Sea in 1st quarter of 2021. Navies of different Countries have been invited to participate. This is the 8th exercise of AMAN series. AMAN is an Urdu word meaning “PEACE” and slogan of AMAN exercise is “Together for Peace”.'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
+                Container(
+                  color: Colors.blueGrey.shade900,
+                  child: new Card(
+                      child: Column(
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -598,43 +854,7 @@ floatingActionButton: FloatingActionButton(
               ),
             ),
           ),
-//          Column(
-//            mainAxisSize: MainAxisSize.min,
-//            children: <Widget>[
-//              Text(
-//                'Gallery',
-//                style: TextStyle(fontSize: 18),
-//              ),
-//              SizedBox(
-//                height: 150.0,
-//                child: ListView.builder(
-//                  physics: ClampingScrollPhysics(),
-//                  shrinkWrap: true,
-//                  scrollDirection: Axis.horizontal,
-//                  itemCount: getgalerrieslist.length,
-//                  itemBuilder: (BuildContext context, int index) => Padding(
-//                    padding: EdgeInsets.only(left:15,top: 15 ),
-//                    child: Container(
-//                      width: 200,
-//                      child: Card(
-//                        shape: RoundedRectangleBorder(
-//                          side: new BorderSide(color: Colors.blue, width: .5),
-//                          borderRadius: BorderRadius.circular(5.0),
-//                        ),
-//                        child: CachedNetworkImage(
-//                          placeholder: (context, url) =>
-//                          const CircularProgressIndicator(),
-//                          imageUrl: getgalerrieslist[index],
-//                        ),
-//                      ),
-//
-//                    ),
-//                  ),
-//                ),
-//              ),
-//
-//            ],
-//          ),
+
           Container(
             margin: EdgeInsets.only(bottom: 16),
             child: Column(

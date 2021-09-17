@@ -45,7 +45,6 @@ class _State extends State<organizers> {
           ),
         ),
         actions: <Widget>[
-
           IconButton(icon: Icon(Icons.home), onPressed: () {
             Navigator.pop(context);
             Navigator.push(
